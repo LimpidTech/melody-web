@@ -1,22 +1,11 @@
 ## Melody Web Frontend
 
-This is a project providing a minimal boilerplate for getting started with
-server-side rendering as well as static rendering for React projects.
+Before runing any commands, make sure to install NodeJS with NPM to install
+dependencies:
 
-To create a new React application with it, you can follow the following steps:
+> npm install
 
-  > git clone https://github.com/monokrome/webpack-react-starter myproject
-
-  > cd myproject
-
-  > npm install
-
-To run a development (not production-ready yet) server for server-side
-rendering:
-
-  > npm start
-
-You can also run without server-side rendering using:
+To get started working on Melody's frontend, you can run this command:
 
   > npm run develop
 
