@@ -15,6 +15,23 @@ const Application = props => (
 )
 
 export default styled(Application)`
-  padding: 0.4rem 0.8rem 0.1rem;
-  background-color: #ECECFE;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  > header {
+    padding: 0.4rem 0.8rem 0.1rem;
+    background-color: #ECECFE;
+    user-select: none;
+  }
+
+  > main {
+    flex-grow: 1;
+  }
+
+  > footer {
+    background-color: #ECECFE;
+    margin-top: 6rem;
+    min-height: 3rem;
+  }
 `
