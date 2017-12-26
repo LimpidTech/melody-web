@@ -1,6 +1,4 @@
-React+Redux Webpack Starter
-===========================
-
+## Melody Web Frontend
 
 This is a project providing a minimal boilerplate for getting started with
 server-side rendering as well as static rendering for React projects.
