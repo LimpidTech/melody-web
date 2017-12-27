@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import UserMenu from 'components/UserMenu'
+import Search from 'components/Search'
 
 function Layout(props) {
   const { className, children } = props
@@ -17,7 +18,7 @@ function Layout(props) {
           <Link to="/home/">Home</Link>
           <Link to="/categories/">Categories</Link>
           <Link to="/topics/">Topics</Link>
-          <input type="text" placeholder="Search" />
+          <Search />
         </nav>
       </header>
       <main>{ children }</main>

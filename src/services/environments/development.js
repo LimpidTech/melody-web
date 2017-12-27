@@ -17,7 +17,6 @@ for (const key in configuration.entry) {
 }
 
 function renderToResponse(request: Object, response: Object) {
-  response.writeHead(200, {'Content-Type': 'text/html'})
   response.end(render(request))
 }
 
@@ -28,7 +27,6 @@ export default class extends ReactRenderingService {
       lazy: false,
       proxy: {
         '/**': {
-          target: '/',
           secure: false,
           bypass: renderToResponse,
         }
