@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 export default styled(props => <div className={props.className} />)`
-  margin: 1em auto 1ex;
+  margin: 0.2em auto 1ex;
   width: 3em;
   height: 3em;
 

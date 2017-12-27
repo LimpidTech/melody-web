@@ -4,15 +4,14 @@ import styled from 'styled-components'
 import { Route, Redirect, Switch } from 'react-router'
 
 import Layout from 'components/Layout'
-import Post from 'components/Post'
+import PostList from 'components/PostList'
 import Home from 'components/Home'
 
 export default () => (
   <Layout>
     <Switch>
       <Route path="/home/" component={Home} exact />
-      <Route path="/categories/" component={Post} />
-      <Route path="/topics/" component={Post} />
+      <Route path="/categories/" component={PostList} />
       <Redirect to="/home/" />
     </Switch>
   </Layout>
