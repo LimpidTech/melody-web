@@ -1,10 +1,11 @@
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
+const DEV_CLIENT_PATH = 'webpack-dev-server/client'
+
 import ReactRenderingService from './index'
 import configuration from '../../../webpack.config'
-
-const DEV_CLIENT_PATH = 'webpack-dev-server/client?http://localhost:3030'
+import render from '../rendering'
 
 configuration.plugins.push(new webpack.HotModuleReplacementPlugin())
 configuration.plugins.push(new webpack.NamedModulesPlugin())
@@ -15,13 +16,23 @@ for (const key in configuration.entry) {
   configuration.entry[key].unshift('webpack/hot/dev-server')
 }
 
+function renderToResponse(request: Object, response: Object) {
+  response.writeHead(200, {'Content-Type': 'text/html'})
+  response.end(render(request))
+}
+
 export default class extends ReactRenderingService {
   createServer() {
-    this.setService(
-      new WebpackDevServer(webpack(configuration), {
-        hot: true,
-        lazy: false,
-      }),
-    )
+    return this.setService(new WebpackDevServer(webpack(configuration), {
+      hot: true,
+      lazy: false,
+      proxy: {
+        '/**': {
+          target: '/',
+          secure: false,
+          bypass: renderToResponse,
+        }
+      }
+    }))
   }
 }

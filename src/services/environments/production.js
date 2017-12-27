@@ -13,9 +13,10 @@ function renderToResponse(request: Object, response: Object) {
 export default class extends ReactRenderingService {
   createServer() {
     const service = express()
+
     service.use(express.static(STATIC_PATH, {index: false}))
     service.get('/', renderToResponse)
-    this.setService(service)
-    return service
+
+    return this.setService(service)
   }
 }

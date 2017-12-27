@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+restart_service() {
+  npm install
+  npm run services
+}
+
+restart_service
+
+while inotifywait -e close_write package.json; do
+  kill $(jobs -n)
+  restart_server
+done

@@ -4,7 +4,7 @@ MAINTAINER Bailey "monokrome" Stoner <monokrome@monokro.me>
 RUN apk update
 RUN apk upgrade
 RUN apk add gcc make musl-dev
-RUN apk add ca-certificates
+RUN apk add ca-certificates inotify-tools
 RUN apk add nodejs-current nodejs-current-dev nodejs-current-npm
 
 ADD . /opt/web
