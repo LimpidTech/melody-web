@@ -3,16 +3,20 @@ import styled from 'styled-components'
 
 import { Link } from 'react-router-dom'
 
+import UserMenu from 'components/UserMenu'
+
 function Layout(props) {
   const { className, children } = props
 
   return (
     <section className={className}>
       <header>
+        <UserMenu />
         <h2>Melody</h2>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="topics/">Topics</Link>
+          <Link to="/home/">Home</Link>
+          <Link to="/categories/">Categories</Link>
+          <Link to="/topics/">Topics</Link>
           <input type="text" placeholder="Search" />
         </nav>
       </header>
@@ -29,12 +33,24 @@ export default styled(Layout)`
   min-height: 100vh;
 
   > header {
-    padding: 0.4rem 0.8rem 0.1rem;
+    padding: 0.4rem 0.8rem 0;
     user-select: none;
   }
 
   > header > h2 {
     display: none;
+    margin-top: 0;
+  }
+
+  > header > nav > a {
+    display: block;
+    color: #393939;
+    text-decoration: none;
+  }
+
+  > header > nav > input {
+    display: block;
+    margin-top: 3em;
   }
 
   > main {
@@ -64,10 +80,15 @@ export default styled(Layout)`
 
     > header > nav > a {
       display: inline-block;
-      padding-right: 1em;
+      padding-right: 3em;
       padding-bottom: 0.2em;
       font-size: 0.9em;
       vertical-align: bottom;
+    }
+
+    > header > nav > input {
+      display: inline-block;
+      margin-top: 0;
     }
 
     > main {
