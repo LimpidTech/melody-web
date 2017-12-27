@@ -6,7 +6,7 @@ import { ServerStyleSheet } from 'styled-components'
 
 import store from 'store'
 
-import Application from '../components/application'
+import Application from '../components/Application'
 
 export default function render(request: Object) {
   const sheet = new ServerStyleSheet()
