@@ -68,6 +68,11 @@ export default styled(Layout)`
   @media (min-width: 780px) {
     flex-direction: column;
 
+    > header {
+      height: 2em;
+      overflow: visible;
+    }
+
     > header > h2 {
       display: inline-block;
     }
