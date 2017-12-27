@@ -27,16 +27,18 @@ export default function render(request: Object, update) {
         <meta charset=UTF-8>
         <title>melody</title>
         <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
+
         <style>
-          body { font-family: 'Didact Gothic', sans-serif; font-size: 1.4em; margin: 0; box-sizing: border-box; }
+          body { font-family: 'Didact Gothic', sans-serif; font-size: 1.35em; margin: 0; box-sizing: border-box; }
           * { margin-top: 0; margin-bottom: 0; }
           * ~ * { margin-top: 0.4em; }
         </style>
+
         ${sheet.getStyleTags()}
       </head>
 
       <body>
-        <section id="root">${document}</section>
+        ${document}
         <script src='/index.js'></script>
       </body>
     </html>

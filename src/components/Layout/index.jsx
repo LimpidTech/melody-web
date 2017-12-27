@@ -1,21 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router'
 
-const Layout = props => (
-  <section className={props.className}>
-    <header>
-      <h1>Melody</h1>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/posts/">Posts</Link>
-        <input type="text" placeholder="Search" />
-      </nav>
-    </header>
-    <main>{ props.children }</main>
-    <footer></footer>
-  </section>
-)
+import { Link } from 'react-router-dom'
+
+function Layout(props) {
+  const { className, children } = props
+
+  return (
+    <section className={className}>
+      <header>
+        <h2>Melody</h2>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="topics/">Topics</Link>
+          <input type="text" placeholder="Search" />
+        </nav>
+      </header>
+      <main>{ children }</main>
+      <footer><a href="https://github.com/MelodyBoard">Melody</a></footer>
+    </section>
+  )
+}
+
 
 export default styled(Layout)`
   display: flex;
@@ -24,27 +30,29 @@ export default styled(Layout)`
 
   > header {
     padding: 0.4rem 0.8rem 0.1rem;
-    background-color: #ECECFE;
     user-select: none;
   }
 
-  > header > h1 {
+  > header > h2 {
     display: none;
   }
 
   > main {
     flex-grow: 1;
     padding: 0.4em;
+    margin-bottom: 0;
   }
 
   > footer {
     display: none;
+    font-size: 1rem;
+    text-align: center;
   }
 
   @media (min-width: 780px) {
     flex-direction: column;
 
-    > header > h1 {
+    > header > h2 {
       display: inline-block;
     }
 
@@ -57,7 +65,9 @@ export default styled(Layout)`
     > header > nav > a {
       display: inline-block;
       padding-right: 1em;
+      padding-bottom: 0.2em;
       font-size: 0.9em;
+      vertical-align: bottom;
     }
 
     > main {
@@ -68,7 +78,6 @@ export default styled(Layout)`
 
     > footer {
       display: block;
-      background-color: #ECECFE;
       margin-top: 6rem;
       min-height: 3rem;
     }

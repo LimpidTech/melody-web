@@ -13,6 +13,6 @@ ReactDOM.render((
       <Application />
     </BrowserRouter>
   </Provider>
-), document.getElementById('root'))
+), document.body.children[0])
 
 if (module.hot) module.hot.accept()
