@@ -17,7 +17,6 @@ function Layout(props) {
         <nav>
           <Link to="/home/">Home</Link>
           <Link to="/categories/">Categories</Link>
-          <Link to="/topics/">Topics</Link>
           <Search />
         </nav>
       </header>
@@ -64,6 +63,7 @@ export default styled(Layout)`
     display: none;
     font-size: 1rem;
     text-align: center;
+    user-select: none;
   }
 
   @media (min-width: 780px) {

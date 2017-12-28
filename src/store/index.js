@@ -1,5 +1,9 @@
 import { createStore } from 'redux'
 
+const INITIAL = {
+  resources: {},
+}
+
 // TODO: Look into better/conventional patterns for this
 const ACTION_HANDLERS = {}
 
@@ -9,6 +13,9 @@ const reducer = (currentState: Object, action: Object) => {
   return handler(currentState, action) || currentState
 }
 
-export default createStore(reducer, {
-  title: '❤',
-})
+function getInitial() {
+  if (typeof window !== 'undefined' && window.initial && window.initial.state) return window.initial.state
+  return INITIAL
+}
+
+export default createStore(reducer, getInitial())
