@@ -6,7 +6,6 @@ export default class ReactRenderingService {
   constructor(render: Function, options: Object = {}) {
     this.options = options
     this.render = render
-
     this.createServer()
   }
 

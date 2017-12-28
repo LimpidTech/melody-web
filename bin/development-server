@@ -9,5 +9,5 @@ restart_service
 
 while inotifywait -e close_write package.json; do
   kill $(jobs -n)
-  restart_server
+  restart_service
 done

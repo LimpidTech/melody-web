@@ -16,10 +16,6 @@ for (const key in configuration.entry) {
   configuration.entry[key].unshift('webpack/hot/dev-server')
 }
 
-function renderToResponse(request: Object, response: Object) {
-  response.end(render(request))
-}
-
 export default class extends ReactRenderingService {
   createServer() {
     return this.setService(new WebpackDevServer(webpack(configuration), {
@@ -28,7 +24,7 @@ export default class extends ReactRenderingService {
       proxy: {
         '/**': {
           secure: false,
-          bypass: renderToResponse,
+          bypass: this.handleRequest.bind(this),
         }
       }
     }))
