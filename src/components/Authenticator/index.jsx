@@ -18,7 +18,7 @@ function Authenticator(props) {
 
   return (
     <section className={props.className}>
-      <Form onSubmit={preventDefault(() => emit.authenticate(username, password))}>
+      <Form onSubmit={preventDefault(() => emit.authenticate({username, password}))}>
         <header><h3>Login</h3></header>
 
         <Label><Input tabIndex={1} type="text" placeholder="Username or email" value={username} onChange={withValue(setUsername)} /></Label>
