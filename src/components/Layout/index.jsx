@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Link } from 'react-router-dom'
-
+import Navigation from 'components/Navigation'
 import UserMenu from 'components/UserMenu'
-import Search from 'components/Search'
 
 function Layout(props) {
   const { className, children } = props
@@ -14,11 +12,7 @@ function Layout(props) {
       <header>
         <UserMenu />
         <h2>Melody</h2>
-        <nav>
-          <Link to="/home/">Home</Link>
-          <Link to="/categories/">Categories</Link>
-          <Search />
-        </nav>
+        <Navigation />
       </header>
       <main>{ children }</main>
       <footer><a href="https://github.com/MelodyBoard">Melody</a></footer>
