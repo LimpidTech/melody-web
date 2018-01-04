@@ -2,6 +2,7 @@ import { createStore } from 'redux'
 
 const INITIAL = {
   resources: {},
+  services: {melody: '/services/'},
 }
 
 // TODO: Look into better/conventional patterns for this
