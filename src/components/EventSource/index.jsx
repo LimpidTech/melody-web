@@ -3,14 +3,14 @@ import React from 'react'
 
 import EventProvider from 'components/EventProvider'
 
-function eventDispatchFunctionName(eventName) {
+function eventDispatchFunctionName (eventName) {
   const lastIndex = eventName.lastIndexOf(':')
   if (lastIndex === -1) return eventName
-  return eventName.slice(lastIndex+1)
+  return eventName.slice(lastIndex + 1)
 }
 
-function eventDispatchFactory(Component, events) {
-  function DispatcherComponent(props, context) {
+function eventDispatchFactory (Component, events) {
+  function DispatcherComponent (props, context) {
     const eventEmitters = {}
 
     for (const index in events) {

@@ -1,6 +1,6 @@
 import render from './rendering'
 
-function getServiceClass() {
+function getServiceClass () {
   switch (process.env.NODE_ENV || 'development') {
     case 'production':
       return require('./environments/production').default

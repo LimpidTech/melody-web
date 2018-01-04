@@ -1,15 +1,14 @@
 import React from 'react'
 import DOM from 'react-dom/server'
-import fs from 'fs'
 import { Provider } from 'react-redux'
 import { ServerStyleSheet } from 'styled-components'
-import { StaticRouter, matchPath } from 'react-router'
+import { StaticRouter } from 'react-router'
 
 import store from 'store'
 
 import Application from '../components/Application'
 
-export default function render(request: Object, update) {
+export default function render (request: Object, update) {
   const context = {}
   const sheet = new ServerStyleSheet()
 

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Navigation from 'components/Navigation'
 import UserMenu from 'components/UserMenu'
 
-function Layout(props) {
+function Layout (props) {
   const { className, children } = props
 
   return (
@@ -15,11 +15,10 @@ function Layout(props) {
         <Navigation />
       </header>
       <main>{ children }</main>
-      <footer><a href="https://github.com/MelodyBoard">Melody</a></footer>
+      <footer><a href='https://github.com/MelodyBoard'>Melody</a></footer>
     </section>
   )
 }
-
 
 export default styled(Layout)`
   display: flex;

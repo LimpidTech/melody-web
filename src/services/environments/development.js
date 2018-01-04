@@ -17,14 +17,14 @@ for (const key in configuration.entry) {
 }
 
 export default class extends ReactRenderingService {
-  createServer() {
+  createServer () {
     return this.setService(new WebpackDevServer(webpack(configuration), {
       hot: true,
       lazy: false,
       proxy: {
         '/**': {
           secure: false,
-          bypass: this.handleRequest.bind(this),
+          bypass: this.handleRequest.bind(this)
         }
       }
     }))

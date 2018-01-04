@@ -1,20 +1,20 @@
 import fetch from 'isomorphic-fetch'
 import store from 'store'
 
-function url(...parts) {
+function url (...parts) {
   const root = store.getState().services.melody
   if (parts.length === 0) return root
   return root + parts.join('.') + '/'
 }
 
-function options(...parts) {
+function options (...parts) {
   const options = Object.assign({
     method: 'POST',
     credentials: 'same-origin',
     headers: [
       ['Accept', 'application/json'],
-      ['Content-Type', 'application/json'],
-    ],
+      ['Content-Type', 'application/json']
+    ]
   }, ...parts)
 
   // Ensure JSON is parsed
@@ -23,13 +23,14 @@ function options(...parts) {
   return options
 }
 
-function request(...parts) {
+function request (...parts) {
   const urlParts = []
   const optionParts = []
 
-  for (const part of parts)
+  for (const part of parts) {
     if (typeof part === 'string') urlParts.push(part)
     else optionParts.push(part)
+  }
 
   return fetch(url(...urlParts), options(...optionParts))
 }
@@ -42,5 +43,5 @@ export default {
   head: request.bind(this, {method: 'HEAD'}),
   options: request.bind(this, {method: 'OPTIONS'}),
   post: request.bind(this, {method: 'POST'}),
-  put: request.bind(this, {method: 'PUT'}),
+  put: request.bind(this, {method: 'PUT'})
 }

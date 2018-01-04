@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { Route, Redirect, Switch } from 'react-router'
 
@@ -14,10 +13,10 @@ export default () => (
   <EventProvider eventMap={eventMap}>
     <Layout>
       <Switch>
-        <Route path="/home/" component={Home} exact />
-        <Route path="/categories/" component={PostList} />
-        <Route path="/login/" component={Authenticator} />
-        <Redirect to="/home/" />
+        <Route path='/home/' component={Home} exact />
+        <Route path='/categories/' component={PostList} />
+        <Route path='/login/' component={Authenticator} />
+        <Redirect to='/home/' />
       </Switch>
     </Layout>
   </EventProvider>

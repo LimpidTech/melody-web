@@ -6,7 +6,7 @@ import ReactRenderingService from './index'
 const STATIC_PATH = process.env.STATIC_PATH || 'dist'
 
 export default class extends ReactRenderingService {
-  createServer() {
+  createServer () {
     const service = express()
 
     service.use(express.static(STATIC_PATH, {index: false}))

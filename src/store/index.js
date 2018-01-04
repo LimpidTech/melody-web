@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 
 const INITIAL = {
   resources: {},
-  services: {melody: '/services/'},
+  services: {melody: '/services/'}
 }
 
 // TODO: Look into better/conventional patterns for this
@@ -14,7 +14,7 @@ const reducer = (currentState: Object, action: Object) => {
   return handler(currentState, action) || currentState
 }
 
-function getInitial() {
+function getInitial () {
   if (typeof window !== 'undefined' && window.initial && window.initial.state) return window.initial.state
   return INITIAL
 }
