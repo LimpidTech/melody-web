@@ -1,0 +1,21 @@
+// -d 3 -x babel-node 
+{
+  "verbose": true,
+
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+
+  "events": {
+    "crash": "npm run development"
+  },
+
+  "watch": [
+    "*.json",
+    "*.js",
+    ".*rc",
+    "src/services/*.js",
+    "src/services/*.jsx"
+  ]
+}

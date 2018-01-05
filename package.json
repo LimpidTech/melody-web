@@ -1,7 +1,11 @@
 {
-  "name": "webpack-react-starter",
-  "version": "0.1.0",
+  "name": "melody-web",
+
+  "author": "Bailey Stoner <monokrome@monokro.me>",
   "description": "",
+  "license": "MIT",
+  "version": "0.1.0",
+
   "scripts": {
     "build": "./node_modules/.bin/cross-env NODE_ENV=production webpack -p && babel src -d lib",
     "dev": "npm run development",
@@ -11,14 +15,13 @@
     "lint": "standard --parser babel-eslint --plugin flowtype --fix src/**/*.js src/**/*.jsx",
     "precommit": "npm run lint",
     "production": "./node_modules/.bin/cross-env NODE_PATH=./lib NODE_ENV=production node lib/services",
-    "services": "./node_modules/.bin/cross-env NODE_PATH=./src nodemon -d 3 -w package.json -w .babelrc -w webpack.config.js -w src/services -e js -e jsx -x babel-node src/services",
+    "services": "./node_modules/.bin/cross-env NODE_PATH=./src nodemon src/services",
     "start": "./node_modules/.bin/cross-env NODE_ENV=development npm run services",
     "test": "jest",
     "tests": "jest --watch --notify",
     "compose": "./node_modules/.bin/cross-env NODE_ENV=development bin/development-server"
   },
-  "author": "Bailey Stoner <monokrome@monokro.me>",
-  "license": "MIT",
+
   "dependencies": {
     "cross-env": "^5.1.1",
     "express": "^4.15.3",
@@ -36,6 +39,7 @@
     "styled-components": "^2.2.3",
     "url-loader": "^0.6.2"
   },
+
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "babel-cli": "^6.24.1",
@@ -73,16 +77,19 @@
     "webpack-dev-server": "^2.4.5",
     "yaemit": "^2.0.0"
   },
+
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/setup-tests.js",
     "moduleFileExtensions": [
       "js",
       "jsx"
     ],
+
     "moduleDirectories": [
       "node_modules",
       "src"
     ],
+
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/fixtures/static/style.js",
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/fixtures/static/style.js"
