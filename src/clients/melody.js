@@ -4,7 +4,7 @@ import store from 'store'
 function url (...parts) {
   const root = store.getState().services.melody
   if (parts.length === 0) return root
-  return root + parts.join('.') + '/'
+  return root + parts.join('/') + '/'
 }
 
 function options (...parts) {
@@ -23,6 +23,15 @@ function options (...parts) {
   return options
 }
 
+function verify(response) {
+  if (response.status < 200 || response.status > 299)
+    throw new Error(
+      'Received unexpected response from Melody services.'
+    )
+
+  return response
+}
+
 function request (...parts) {
   const urlParts = []
   const optionParts = []
@@ -32,7 +41,12 @@ function request (...parts) {
     else optionParts.push(part)
   }
 
-  return fetch(url(...urlParts), options(...optionParts))
+  return new Promise((resolve, reject) => {
+    fetch(url(...urlParts), options(...optionParts))
+      .then(verify)
+      .then(resolve)
+      .catch(reject)
+  })
 }
 
 export default {

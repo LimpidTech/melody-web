@@ -1,3 +1,11 @@
 import React from 'react'
 
-export default () => <section />
+import PostList from 'components/PostList'
+import WithCollection from 'components/WithCollection'
+
+export default () => (
+  <WithCollection
+    collection="recent_posts"
+    as="posts"
+    using={PostList} />
+)
