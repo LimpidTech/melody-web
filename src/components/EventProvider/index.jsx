@@ -18,8 +18,14 @@ export default class EventProvider extends Component {
 
     context[EventProvider.name] = new Emitter()
 
-    for (const eventName in eventMap)
-      context[EventProvider.name].on(eventName, eventMap[eventName])
+    for (const eventName in eventMap) {
+      const handler = eventMap[eventName]
+      context[EventProvider.name].on(eventName, (...args) => {
+        return new Promise((resolve, reject) => {
+          return resolve(handler(...args))
+        })
+      })
+    }
 
     return context
   }
