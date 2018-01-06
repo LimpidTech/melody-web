@@ -10,9 +10,7 @@
     "js": "babel-node --harmony"
   },
 
-  "events": {
-    "crash": "npm run development"
-  },
+  "events": {},
 
   "watch": [
     "*.json",
