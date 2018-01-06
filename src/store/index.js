@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 
 const INITIAL = {
   resources: {},
-  services: {melody: '/services/'}
+  services: {melody: 'http://localhost:8000/services/'}
 }
 
 // TODO: Look into better/conventional patterns for this

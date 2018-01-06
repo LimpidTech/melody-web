@@ -1,5 +1,18 @@
 import React from 'react'
-
 import styled from 'styled-components'
 
-export default props => <input className={props.className} type='text' placeholder='Search' />
+import Input from 'components/Input'
+
+import withState from './state'
+
+
+const Search = props => (
+  <Input
+    size={props.size}
+    onFocus={() => props.setSize(18)}
+    onBlur={() => props.setSize(3)}
+    type='text'
+    placeholder='Search' />
+)
+
+export default withState(Search)
