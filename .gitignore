@@ -6,7 +6,7 @@
 
 # Build output
 /dist/*
-
+/coverage/*
 
 # Package locking
 *-lock.json
