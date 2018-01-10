@@ -10,6 +10,7 @@ RUN apk add nodejs-current nodejs-current-dev nodejs-current-npm
 ADD . /opt/web
 WORKDIR /opt/web
 
+RUN npm install -g npx
 RUN npm install
 RUN npm run build
 
