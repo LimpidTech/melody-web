@@ -5,16 +5,14 @@ import Navigation from 'components/Navigation'
 import UserMenu from 'components/UserMenu'
 
 function Layout (props) {
-  const { className, children } = props
-
   return (
-    <section className={className}>
+    <section className={props.className}>
       <header>
         <UserMenu />
         <h2>Melody</h2>
         <Navigation />
       </header>
-      <main>{ children }</main>
+      <main>{ props.children }</main>
       <footer><a href='https://github.com/MelodyBoard'>Melody</a></footer>
     </section>
   )

@@ -1,5 +1,6 @@
-import React from 'react'
 import DOM from 'react-dom/server'
+import React from 'react'
+
 import { Provider } from 'react-redux'
 import { ServerStyleSheet } from 'styled-components'
 import { StaticRouter } from 'react-router'

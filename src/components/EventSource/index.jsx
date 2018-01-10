@@ -16,7 +16,7 @@ function eventDispatchFactory (Component, events) {
     for (const index in events) {
       const eventName = events[index]
       const handlerName = eventDispatchFunctionName(eventName)
-      const emitter = context[EventProvider.name]
+      const emitter = context.EventProvider
 
       eventEmitters[handlerName] = (...args) =>
         new Promise((resolve, reject) =>

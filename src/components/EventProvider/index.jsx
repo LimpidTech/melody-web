@@ -5,7 +5,7 @@ import Emitter from 'yaemit'
 
 export default class EventProvider extends Component {
   static childContextTypes = {
-    [EventProvider.name]: PropTypes.object,
+    EventProvider: PropTypes.object,
   }
 
   static propTypes = {
@@ -16,11 +16,11 @@ export default class EventProvider extends Component {
     const context = {}
     const { eventMap } = this.props
 
-    context[EventProvider.name] = new Emitter()
+    context.EventProvider = new Emitter()
 
     for (const eventName in eventMap) {
       const handler = eventMap[eventName]
-      context[EventProvider.name].on(eventName, (...args) => {
+      context.EventProvider.on(eventName, (...args) => {
         return new Promise((resolve, reject) => {
           return resolve(handler(...args))
         })

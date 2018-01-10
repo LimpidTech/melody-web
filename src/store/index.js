@@ -1,8 +1,13 @@
 import { createStore } from 'redux'
 
+function getBaseURL() {
+  if (typeof window === 'undefined') return ''
+  return `${window.location.protocol}//${window.location.host}/services/`
+}
+
 const INITIAL = {
   resources: {},
-  services: {melody: 'http://localhost:8000/services/'}
+  services: {melody: getBaseURL()}
 }
 
 // TODO: Look into better/conventional patterns for this
