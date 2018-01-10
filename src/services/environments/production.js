@@ -10,7 +10,7 @@ export default class extends ReactRenderingService {
     const service = express()
 
     service.use(express.static(STATIC_PATH, {index: false}))
-    service.get('/', this.handleRequest.bind(this))
+    service.get('/*', this.handleRequest.bind(this))
 
     return this.setService(service)
   }
