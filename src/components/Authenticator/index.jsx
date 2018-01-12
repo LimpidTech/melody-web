@@ -11,21 +11,50 @@ import state from './state'
 
 function Authenticator (props) {
   const {
+    melodyUrl,
     username, setUsername,
     password, setPassword,
     emit
   } = props
 
+  const authenticationUrl = `${ melodyUrl }authentication/`
+  const onSubmit = preventDefault(() => emit.authenticate({username, password}))
+
   return (
     <section className={props.className}>
-      <Form onSubmit={preventDefault(() => emit.authenticate({username, password}))}>
-        <header><h3>Login</h3></header>
+      <Form
+          action={authenticationUrl}
+          method="POST"
+          onSubmit={onSubmit}>
 
-        <Label><Input tabIndex={1} type='text' placeholder='Username or email' value={username} onChange={withValue(setUsername)} /></Label>
-        <Label><Input tabIndex={2} type='password' placeholder='Password' value={password} onChange={withValue(setPassword)} /></Label>
+        <header>
+          <h3>Login</h3>
+        </header>
+
+        <Label>
+          <Input
+            tabIndex={1} type='text'
+            name="username"
+            placeholder='Username or email' value={username}
+            onChange={withValue(setUsername)} />
+        </Label>
+
+        <Label>
+          <Input
+            tabIndex={2} type='password'
+            name="password"
+            placeholder='Password' value={password}
+            onChange={withValue(setPassword)} />
+        </Label>
+
+        <Label>
+          <Input type="hidden" name="redirect_uri" value="/" />
+        </Label>
 
         <footer>
-          <p><Input type='submit' value='Submit' /></p>
+          <p>
+            <Input type='submit' value='Submit' />
+          </p>
         </footer>
       </Form>
     </section>
