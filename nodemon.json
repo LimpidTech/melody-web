@@ -1,22 +1,14 @@
 {
+  "execMap": {"js": "babel-node --inspect", "jsx": "babel-node --inspect"},
+  "ignore": [".git", "node_modules/**/node_modules"],
   "verbose": true,
-
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules"
-  ],
-
-  "execMap": {
-    "js": "babel-node --harmony"
-  },
-
-  "events": {},
-
   "watch": [
     "*.json",
     "*.js",
     ".*rc",
-    "src/services/*.js",
-    "src/services/*.jsx"
+    "src/*.js",
+    "src/**/*.js",
+    "src/*.jsx",
+    "src/**/*.jsx"
   ]
 }
