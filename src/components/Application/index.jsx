@@ -13,10 +13,10 @@ export default () => (
   <EventProvider eventMap={eventHandlers}>
     <Layout>
       <Switch>
-        <Route path='/home/' component={Home} exact />
+        <Route path='/' component={Home} exact />
         <Route path='/categories/' component={PostList} />
         <Route path='/login/' component={Authenticator} />
-        <Redirect to='/home/' />
+        <Redirect to='/' />
       </Switch>
     </Layout>
   </EventProvider>

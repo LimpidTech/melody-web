@@ -1,11 +1,17 @@
 import React from 'react'
 
-const post = {}
+export default props => {
+  return (
+    <article>
+      <header>
+        {props.subject && <h2>{ props.subject }</h2>}
+      </header>
 
-export default () => (
-  <article>
-    <header><h2 /></header>
-    <p />
-    <footer />
-  </article>
-)
+      {props.html && <div dangerouslySetInnerHTML={ {__html: props.html} } />}
+
+      <footer>
+        {props.topics.map(topic => <a href="#">{topic}</a>)}
+      </footer>
+    </article>
+  )
+}

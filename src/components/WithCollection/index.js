@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 import withState from './state'
 
-class WithCollection extends Component {
+@withState
+export default class WithCollection extends Component {
   shouldComponentUpdate({...next}) {
     if (this.props.collection !== next.collection)
       return true
@@ -15,19 +16,15 @@ class WithCollection extends Component {
 
   render() {
     const {
-      collection, as, using,
-      collectionItems,
+      children,
+      collection, as, using: Using,
       emit,
       ...proxyProps
     } = this.props
 
-    proxyProps[as] = collectionItems
+    if (!this.props[as]) return null
 
-    // TODO: Update collectionItems
-    // emit.retrieve(collection)
-
-    return using(proxyProps)
+    proxyProps[as] = this.props[as].items
+    return <Using {...proxyProps}>{children}</Using>
   }
 }
-
-export default withState(WithCollection)

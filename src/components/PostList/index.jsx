@@ -1,15 +1,13 @@
 import React from 'react'
 
 import Post from 'components/Post'
-import Loading from 'components/Loading'
 
 import withState from './state'
 
-const PostList = props => {
-  if (props.posts.length === 0)
-    return <Loading>loading</Loading>
-
-  return <Post />
-}
-
-export default withState(PostList)
+export default withState(props => {
+  return (
+    <section>
+      {props.posts.map(post => <Post {...post} />)}
+    </section>
+  )
+})

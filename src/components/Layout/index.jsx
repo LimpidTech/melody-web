@@ -12,8 +12,12 @@ function Layout (props) {
         <h2>Melody</h2>
         <Navigation />
       </header>
+
       <main>{ props.children }</main>
-      <footer><a href='https://github.com/MelodyBoard'>Melody</a></footer>
+
+      <footer>
+        <a href='https://github.com/MelodyBoard'>Melody</a>
+      </footer>
     </section>
   )
 }

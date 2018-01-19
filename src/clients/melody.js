@@ -1,5 +1,11 @@
+import Promise from 'bluebird'
+
 import fetch from 'isomorphic-fetch'
 import store from 'store'
+import { RENDERING_ENVIRONMENT_SERVER } from 'constants'
+
+const requestBuffer = new Set()
+const responseCache = new Map()
 
 function url (...parts) {
   const root = store.getState().services.melody
@@ -18,8 +24,13 @@ function options (...parts) {
   }, ...parts)
 
   // Ensure JSON is parsed
-  if (!options.body || typeof options.body === 'string') return options
+  if (
+    typeof options.body === 'undefined' ||
+    typeof options.body === 'string'
+  ) return options
+
   options.body = JSON.stringify(options.body)
+
   return options
 }
 
@@ -29,7 +40,27 @@ function verify(response) {
       'Received unexpected response from Melody services.'
     )
 
+  return response.json()
+}
+
+function withServerEntries(url, options, promise) {
+  if (store.getState().environment !== RENDERING_ENVIRONMENT_SERVER)
+    return promise
+
+  requestBuffer.add(promise)
+
+  return promise.finally()
+}
+
+function cacheResources(response) {
+  if (response.url) responseCache.set(response.url, response)
   return response
+}
+
+function getCached(resourceUrl) {
+  const cachedValue = responseCache.get(url(resourceUrl))
+  if (typeof cachedValue !== 'undefined') return cachedValue
+  return null
 }
 
 function request (...parts) {
@@ -41,15 +72,21 @@ function request (...parts) {
     else optionParts.push(part)
   }
 
-  return new Promise((resolve, reject) => {
-    fetch(url(...urlParts), options(...optionParts))
+  const requestURL = url(...urlParts)
+  const requestOptions = options(...optionParts)
+
+  const promise = new Promise(
+    (resolve, reject) => fetch(requestURL, requestOptions)
       .then(verify)
+      .then(cacheResources)
       .then(resolve)
-      .catch(reject)
-  })
+      .catch(reject))
+
+  return withServerEntries(requestURL, requestOptions, promise)
 }
 
 export default {
+  getCached,
   request,
 
   delete: request.bind(this, {method: 'DELETE'}),
@@ -57,5 +94,7 @@ export default {
   head: request.bind(this, {method: 'HEAD'}),
   options: request.bind(this, {method: 'OPTIONS'}),
   post: request.bind(this, {method: 'POST'}),
-  put: request.bind(this, {method: 'PUT'})
+  put: request.bind(this, {method: 'PUT'}),
+
+  awaitAllResponses: () => Promise.all(requestBuffer),
 }

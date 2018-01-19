@@ -7,5 +7,5 @@ function authenticate ({username, password}) {
 }
 
 export default {
-  'authentication:authenticate': authenticate
+  'authentication:authenticate': authenticate,
 }

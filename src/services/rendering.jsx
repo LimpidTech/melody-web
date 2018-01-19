@@ -1,27 +1,20 @@
 import DOM from 'react-dom/server'
+import Promise from 'bluebird'
 import React from 'react'
 
 import { Provider } from 'react-redux'
 import { ServerStyleSheet } from 'styled-components'
 import { StaticRouter } from 'react-router'
 
+import melody from 'clients/melody'
 import store from 'store'
 
 import Application from '../components/Application'
 
-export default function render (request: Object, update) {
-  const context = {}
-  const sheet = new ServerStyleSheet()
+function asDocument(document, sheet) {
+  const rendered = DOM.renderToString(document)
 
-  const document = DOM.renderToString(sheet.collectStyles(
-    <Provider store={store}>
-      <StaticRouter context={context} location={request.url}>
-        <Application />
-      </StaticRouter>
-    </Provider>
-  ))
-
-  const response = `
+  return `
     <html>
       <head>
         <meta charset=UTF-8>
@@ -38,11 +31,30 @@ export default function render (request: Object, update) {
       </head>
 
       <body>
-        ${document}
-        <script src='/index.js'></script>
+        ${rendered}
       </body>
     </html>
   `
+}
 
-  return response
+export default function render (request: Object) {
+  const context = {}
+  const sheet = new ServerStyleSheet()
+
+  const document = sheet.collectStyles((
+    <Provider store={store}>
+      <StaticRouter context={context} location={request.url}>
+        <Application />
+      </StaticRouter>
+    </Provider>
+  ))
+
+  // Okay, seriously - how do I prevent needing to render twice?
+  DOM.renderToString(document)
+
+  const renderResponse = (...args) => {
+    return asDocument(document, sheet)
+  }
+
+  return melody.awaitAllResponses().then(renderResponse, renderResponse)
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
 export default function Form (props) {
-  const { children, ...options } = props
-  return <form {...options}>{children}</form>
+  const { children, ...proxiedProps } = props
+  return <form {...proxiedProps}>{children}</form>
 }

@@ -22,7 +22,7 @@ export default class extends ReactRenderingService {
       hot: true,
       lazy: false,
       proxy: {
-        '/**': {
+        '**': {
           secure: false,
           bypass: this.handleRequest.bind(this)
         }

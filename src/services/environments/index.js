@@ -22,8 +22,16 @@ export default class ReactRenderingService {
   }
 
   handleRequest(request: Object, response: Object) {
-    response.writeHead(200, {'Content-Type': 'text/html'})
-    return response.end(this.render(request))
+    this.render(request)
+      .then(rendered => {
+        response.writeHead(200, {'Content-Type': 'text/html'})
+        response.end(rendered)
+      })
+      .catch(err => {
+        console.error(`Rendering failed: ${err}`)
+        response.writeHead(500, {'Content-Type': 'text/html'})
+        response.end()
+      })
   }
 
   listen(port: number) {
