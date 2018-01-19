@@ -14,7 +14,6 @@ export default () => (
     <Layout>
       <Switch>
         <Route path='/' component={Home} exact />
-        <Route path='/categories/' component={PostList} />
         <Route path='/login/' component={Authenticator} />
         <Redirect to='/' />
       </Switch>
