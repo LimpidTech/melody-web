@@ -1,4 +1,4 @@
-import { compose, withState, pure } from 'recompose'
+import { compose } from 'recompose'
 
 import { connect } from 'react-redux'
 import EventSource from 'components/EventSource'

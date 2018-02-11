@@ -1,6 +1,6 @@
 import { createStore } from 'redux'
 
-import { RENDERING_ENVIRONMENT_CLIENT, RENDERING_ENVIRONMENT_SERVER } from 'constants'
+import { RENDERING_ENVIRONMENT_CLIENT, RENDERING_ENVIRONMENT_SERVER } from '../constants'
 
 function getBaseURL () {
   if (typeof window === 'undefined') return 'http://localhost:8000/services/'

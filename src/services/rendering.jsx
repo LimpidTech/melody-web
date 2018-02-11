@@ -1,5 +1,4 @@
 import DOM from 'react-dom/server'
-import Promise from 'bluebird'
 import React from 'react'
 
 import { Provider } from 'react-redux'
@@ -49,8 +48,11 @@ export default function render (request: Object) {
     </Provider>
   ))
 
-  // Okay, seriously - how do I prevent needing to render twice?
+  // Okay, seriously - how do I prevent needing to render twice for collection
+  // requests to services?
   DOM.renderToString(document)
 
-  return melody.awaitAllResponses().then(renderResponse, renderResponse)
+  return melody
+    .awaitAllResponses()
+    .then(renderResponse, renderResponse)
 }

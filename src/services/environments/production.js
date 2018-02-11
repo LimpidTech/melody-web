@@ -1,6 +1,5 @@
 import express from 'express'
 
-import render from '../rendering'
 import ReactRenderingService from './index'
 
 const STATIC_PATH = process.env.STATIC_PATH || 'dist'

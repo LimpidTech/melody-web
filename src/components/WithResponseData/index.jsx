@@ -10,7 +10,7 @@ import withState from './state'
 @withState
 class WithResponseData extends React.Component {
   static propTypes = {
-    childComponent: PropTypes.node.isRequired,
+    childComponent: PropTypes.func.isRequired,
     environment: PropTypes.string.isRequired,
     requestURI: PropTypes.string.isRequired,
 
@@ -24,7 +24,7 @@ class WithResponseData extends React.Component {
   componentWillMount () {
     const { requestURI, setResponseData, environment } = this.props
 
-    if (this.props.environment === RENDERING_ENVIRONMENT_CLIENT) {
+    if (environment === RENDERING_ENVIRONMENT_CLIENT) {
       melody.get(requestURI)
         .then(setResponseData)
         .catch(() => setResponseData(null))
@@ -46,7 +46,9 @@ class WithResponseData extends React.Component {
     proxyProps.as = as
     proxyProps[as] = responseData
 
-    if (this.props.environment === RENDERING_ENVIRONMENT_SERVER) { proxyProps[proxyProps.as] = proxyProps[proxyProps.as] || melody.getCached(requestURI) }
+    if (this.props.environment === RENDERING_ENVIRONMENT_SERVER) {
+      proxyProps[proxyProps.as] = proxyProps[proxyProps.as] || melody.getCached(requestURI)
+    }
 
     return <ChildComponent {...proxyProps}>{ children }</ChildComponent>
   }

@@ -1,11 +1,10 @@
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
-const DEV_CLIENT_PATH = 'webpack-dev-server/client'
-
 import ReactRenderingService from './index'
 import configuration from '../../../webpack.config'
-import render from '../rendering'
+
+const DEV_CLIENT_PATH = 'webpack-dev-server/client'
 
 configuration.plugins.push(new webpack.HotModuleReplacementPlugin())
 configuration.plugins.push(new webpack.NamedModulesPlugin())
@@ -21,6 +20,10 @@ export default class extends ReactRenderingService {
     return this.setService(new WebpackDevServer(webpack(configuration), {
       hot: true,
       lazy: false,
+      quiet: false,
+      noInfo: false,
+      historyApiFallback: true,
+
       proxy: {
         '**': {
           secure: false,

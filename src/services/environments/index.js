@@ -1,8 +1,4 @@
 export default class ReactRenderingService {
-  options: Object
-  render: Function
-  service: Object
-
   constructor (render: Function, options: Object = {}) {
     this.options = options
     this.render = render
@@ -23,6 +19,10 @@ export default class ReactRenderingService {
 
   handleRequest (request: Object, response: Object) {
     this.render(request)
+      .then(content => {
+        response.writeHead(200, {'Content-Type': 'text/html'})
+        response.end(content)
+      })
       .catch(err => {
         console.error(`Rendering failed: ${err}`)
         response.writeHead(500, {'Content-Type': 'text/html'})
