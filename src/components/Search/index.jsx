@@ -5,7 +5,6 @@ import Input from 'components/Input'
 
 import withState from './state'
 
-
 const Search = props => (
   <Input
     {...props}

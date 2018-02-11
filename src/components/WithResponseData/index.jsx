@@ -17,20 +17,21 @@ class WithResponseData extends React.Component {
     setResponseData: PropTypes.func.isRequired,
     responseData: PropTypes.oneOf([
       PropTypes.object,
-      PropTypes.array,
-    ]),
+      PropTypes.array
+    ])
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const { requestURI, setResponseData, environment } = this.props
 
-    if (this.props.environment === RENDERING_ENVIRONMENT_CLIENT) 
+    if (this.props.environment === RENDERING_ENVIRONMENT_CLIENT) {
       melody.get(requestURI)
         .then(setResponseData)
         .catch(() => setResponseData(null))
+    }
   }
 
-  render() {
+  render () {
     const {
       requestURI,
       environment,
@@ -45,8 +46,7 @@ class WithResponseData extends React.Component {
     proxyProps.as = as
     proxyProps[as] = responseData
 
-    if (this.props.environment === RENDERING_ENVIRONMENT_SERVER)
-      proxyProps[proxyProps.as] = proxyProps[proxyProps.as] || melody.getCached(requestURI)
+    if (this.props.environment === RENDERING_ENVIRONMENT_SERVER) { proxyProps[proxyProps.as] = proxyProps[proxyProps.as] || melody.getCached(requestURI) }
 
     return <ChildComponent {...proxyProps}>{ children }</ChildComponent>
   }

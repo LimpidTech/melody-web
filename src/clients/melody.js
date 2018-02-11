@@ -34,30 +34,30 @@ function options (...parts) {
   return options
 }
 
-function verify(response) {
-  if (response.status < 200 || response.status > 299)
+function verify (response) {
+  if (response.status < 200 || response.status > 299) {
     throw new Error(
       'Received unexpected response from Melody services.'
     )
+  }
 
   return response.json()
 }
 
-function withServerEntries(url, options, promise) {
-  if (store.getState().environment !== RENDERING_ENVIRONMENT_SERVER)
-    return promise
+function withServerEntries (url, options, promise) {
+  if (store.getState().environment !== RENDERING_ENVIRONMENT_SERVER) { return promise }
 
   requestBuffer.add(promise)
 
   return promise.finally()
 }
 
-function cacheResources(response) {
+function cacheResources (response) {
   if (response.url) responseCache.set(response.url, response)
   return response
 }
 
-function getCached(resourceUrl) {
+function getCached (resourceUrl) {
   const cachedValue = responseCache.get(url(resourceUrl))
   if (typeof cachedValue !== 'undefined') return cachedValue
   return null
@@ -96,5 +96,5 @@ export default {
   post: request.bind(this, {method: 'POST'}),
   put: request.bind(this, {method: 'PUT'}),
 
-  awaitAllResponses: () => Promise.all(requestBuffer),
+  awaitAllResponses: () => Promise.all(requestBuffer)
 }

@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 
 import { RENDERING_ENVIRONMENT_CLIENT, RENDERING_ENVIRONMENT_SERVER } from 'constants'
 
-function getBaseURL() {
+function getBaseURL () {
   if (typeof window === 'undefined') return 'http://localhost:8000/services/'
   return `${window.location.protocol}//${window.location.host}/services/`
 }
@@ -16,7 +16,7 @@ const reducer = (currentState: Object, action: Object) => {
   return handler(currentState, action) || currentState
 }
 
-function getRenderingEnvironment() {
+function getRenderingEnvironment () {
   if (typeof window !== 'undefined') return RENDERING_ENVIRONMENT_CLIENT
   return RENDERING_ENVIRONMENT_SERVER
 }
@@ -30,7 +30,7 @@ const INITIAL = {
   environment: getRenderingEnvironment(),
   resources: {},
   responseData: [],
-  services: {melody: getBaseURL()},
+  services: {melody: getBaseURL()}
 }
 
 export default createStore(reducer, getInitial())

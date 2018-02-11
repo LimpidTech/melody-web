@@ -11,7 +11,7 @@ import store from 'store'
 
 import Application from '../components/Application'
 
-function asDocument(document, sheet) {
+function asDocument (document, sheet) {
   const rendered = DOM.renderToString(document)
 
   return `
@@ -30,9 +30,7 @@ function asDocument(document, sheet) {
         ${sheet.getStyleTags()}
       </head>
 
-      <body>
-        ${rendered}
-      </body>
+      <body>${rendered}</body>
     </html>
   `
 }
@@ -40,6 +38,8 @@ function asDocument(document, sheet) {
 export default function render (request: Object) {
   const context = {}
   const sheet = new ServerStyleSheet()
+
+  const renderResponse = (...args) => asDocument(document, sheet)
 
   const document = sheet.collectStyles((
     <Provider store={store}>
@@ -51,10 +51,6 @@ export default function render (request: Object) {
 
   // Okay, seriously - how do I prevent needing to render twice?
   DOM.renderToString(document)
-
-  const renderResponse = (...args) => {
-    return asDocument(document, sheet)
-  }
 
   return melody.awaitAllResponses().then(renderResponse, renderResponse)
 }

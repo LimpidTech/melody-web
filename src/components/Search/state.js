@@ -1,5 +1,5 @@
 import { compose, withState } from 'recompose'
 
 export default compose(
-  withState('size', 'setSize', 3),
+  withState('size', 'setSize', 3)
 )

@@ -4,17 +4,15 @@ import withState from './state'
 
 @withState
 export default class WithCollection extends Component {
-  shouldComponentUpdate({...next}) {
-    if (this.props.collection !== next.collection)
-      return true
+  shouldComponentUpdate ({...next}) {
+    if (this.props.collection !== next.collection) { return true }
 
-    if (this.props.collectionItems !== next.collectionItems)
-      return true
+    if (this.props.collectionItems !== next.collectionItems) { return true }
 
     return false
   }
 
-  render() {
+  render () {
     const {
       children,
       collection, as, using: Using,

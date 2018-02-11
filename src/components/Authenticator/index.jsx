@@ -17,15 +17,15 @@ function Authenticator (props) {
     emit
   } = props
 
-  const authenticationUrl = `${ melodyUrl }authentication/`
+  const authenticationUrl = `${melodyUrl}authentication/`
   const onSubmit = preventDefault(() => emit.authenticate({username, password}))
 
   return (
     <section className={props.className}>
       <Form
-          action={authenticationUrl}
-          method="POST"
-          onSubmit={onSubmit}>
+        action={authenticationUrl}
+        method='POST'
+        onSubmit={onSubmit}>
 
         <header>
           <h3>Login</h3>
@@ -34,7 +34,7 @@ function Authenticator (props) {
         <Label>
           <Input
             tabIndex={1} type='text'
-            name="username"
+            name='username'
             placeholder='Username or email' value={username}
             onChange={withValue(setUsername)} />
         </Label>
@@ -42,13 +42,13 @@ function Authenticator (props) {
         <Label>
           <Input
             tabIndex={2} type='password'
-            name="password"
+            name='password'
             placeholder='Password' value={password}
             onChange={withValue(setPassword)} />
         </Label>
 
         <Label>
-          <Input type="hidden" name="redirect_uri" value="/" />
+          <Input type='hidden' name='redirect_uri' value='/' />
         </Label>
 
         <footer>

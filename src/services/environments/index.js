@@ -3,30 +3,26 @@ export default class ReactRenderingService {
   render: Function
   service: Object
 
-  constructor(render: Function, options: Object = {}) {
+  constructor (render: Function, options: Object = {}) {
     this.options = options
     this.render = render
     this.createServer()
   }
 
-  createServer() {
+  createServer () {
     throw new Error(
-      'createServer must be implemented on ReactRenderingService subclasses.',
+      'createServer must be implemented on ReactRenderingService subclasses.'
     )
   }
 
-  setService(service: Object) {
+  setService (service: Object) {
     this.service = service
     this.listen(this.options.port)
     return this.service
   }
 
-  handleRequest(request: Object, response: Object) {
+  handleRequest (request: Object, response: Object) {
     this.render(request)
-      .then(rendered => {
-        response.writeHead(200, {'Content-Type': 'text/html'})
-        response.end(rendered)
-      })
       .catch(err => {
         console.error(`Rendering failed: ${err}`)
         response.writeHead(500, {'Content-Type': 'text/html'})
@@ -34,7 +30,7 @@ export default class ReactRenderingService {
       })
   }
 
-  listen(port: number) {
+  listen (port: number) {
     this.service.listen(process.env.PORT || port || 3030)
   }
 }

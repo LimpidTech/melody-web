@@ -5,14 +5,14 @@ import Emitter from 'yaemit'
 
 export default class EventProvider extends Component {
   static childContextTypes = {
-    EventProvider: PropTypes.object,
+    EventProvider: PropTypes.object
   }
 
   static propTypes = {
-    eventMap: PropTypes.object.isRequired,
+    eventMap: PropTypes.object.isRequired
   }
 
-  getChildContext() {
+  getChildContext () {
     const context = {}
     const { eventMap } = this.props
 
@@ -30,7 +30,7 @@ export default class EventProvider extends Component {
     return context
   }
 
-  render() {
+  render () {
     return this.props.children
   }
 }

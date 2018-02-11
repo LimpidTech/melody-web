@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 
-function mapStateToProps(state, ...ownProps) {
+function mapStateToProps (state, ...ownProps) {
   return {
     environment: state.environment,
-    ...ownProps,
+    ...ownProps
   }
 }
 

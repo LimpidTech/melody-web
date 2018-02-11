@@ -1,9 +1,9 @@
 import melody from 'clients/melody'
 
-function retrieveCollections(name) {
+function retrieveCollections (name) {
   return melody.get('collection', name)
 }
 
 export default {
-  'collections:retrieve': retrieveCollections,
+  'collections:retrieve': retrieveCollections
 }
