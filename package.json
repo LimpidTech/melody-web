@@ -72,6 +72,7 @@
     "pleeease-filters": "^4.0.0",
     "prettier": "^1.10.2",
     "prettier-eslint-cli": "^4.7.0",
+    "react-cookie": "^2.1.2",
     "standard": "^10.0.3",
     "standard-flow": "^1.0.0",
     "webpack": "^3.10.0",
@@ -104,7 +105,13 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "plugins": ["flowtype"],
-    "globals": ["it", "describe", "expect"]
+    "plugins": [
+      "flowtype"
+    ],
+    "globals": [
+      "it",
+      "describe",
+      "expect"
+    ]
   }
 }

@@ -1,9 +1,10 @@
 import DOM from 'react-dom/server'
 import React from 'react'
 
+import { CookiesProvider, Cookies } from 'react-cookie'
 import { Provider } from 'react-redux'
-import { ServerStyleSheet } from 'styled-components'
 import { StaticRouter } from 'react-router'
+import { ServerStyleSheet } from 'styled-components'
 
 import melody from 'clients/melody'
 import store from 'store'
@@ -42,9 +43,11 @@ export default function render (request: Object) {
 
   const document = sheet.collectStyles((
     <Provider store={store}>
-      <StaticRouter context={context} location={request.url}>
-        <Application />
-      </StaticRouter>
+      <CookiesProvider cookies={new Cookies(request.header('Cookie'))}>
+        <StaticRouter context={context} location={request.url}>
+          <Application />
+        </StaticRouter>
+      </CookiesProvider>
     </Provider>
   ))
 
