@@ -1,3 +1,4 @@
+import express from 'express'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
@@ -17,19 +18,7 @@ for (const key in configuration.entry) {
 
 export default class extends ReactRenderingService {
   createServer () {
-    return this.setService(new WebpackDevServer(webpack(configuration), {
-      hot: true,
-      lazy: false,
-      quiet: false,
-      noInfo: false,
-      historyApiFallback: true,
-
-      proxy: {
-        '**': {
-          secure: false,
-          bypass: this.handleRequest.bind(this)
-        }
-      }
-    }))
+    const service = express().get('**', this.handleRequest.bind(this))
+    return this.setService(service)
   }
 }

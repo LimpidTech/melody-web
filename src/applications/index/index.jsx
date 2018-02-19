@@ -6,13 +6,13 @@ import { BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 
 import store from 'store'
-import Application from 'components/Application'
+import Routing from 'components/Routing'
 
 ReactDOM.render((
   <Provider store={store}>
     <CookiesProvider>
       <BrowserRouter>
-        <Application />
+        <Routing />
       </BrowserRouter>
     </CookiesProvider>
   </Provider>

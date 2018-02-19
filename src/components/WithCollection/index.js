@@ -23,6 +23,7 @@ export default class WithCollection extends Component {
     if (!this.props[as]) return null
 
     proxyProps[as] = this.props[as].items
+
     return <Using {...proxyProps}>{children}</Using>
   }
 }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { RENDERING_ENVIRONMENT_CLIENT, RENDERING_ENVIRONMENT_SERVER } from 'constants'
+import { RENDERING_ENVIRONMENT_CLIENT, RENDERING_ENVIRONMENT_SERVER } from '../../constants'
 
 import melody from 'clients/melody'
 
@@ -15,10 +15,10 @@ class WithResponseData extends React.Component {
     requestURI: PropTypes.string.isRequired,
 
     setResponseData: PropTypes.func.isRequired,
-    responseData: PropTypes.oneOf([
+    responseData: PropTypes.oneOf(
       PropTypes.object,
-      PropTypes.array
-    ])
+      PropTypes.arrayOf(PropTypes.object)
+    )
   }
 
   componentWillMount () {
@@ -46,10 +46,6 @@ class WithResponseData extends React.Component {
     proxyProps.as = as
     proxyProps[as] = responseData
 
-    if (this.props.environment === RENDERING_ENVIRONMENT_SERVER) {
-      proxyProps[proxyProps.as] = proxyProps[proxyProps.as] || melody.getCached(requestURI)
-    }
-
     return <ChildComponent {...proxyProps}>{ children }</ChildComponent>
   }
 }
@@ -60,11 +56,11 @@ export default (uri) => {
 
     // Preload data as soon as we can
     return props => {
-      melody.get(uri).then(response => response.data)
+      const responseData = melody.getCached(uri)
 
-      return (
-        <WithResponseData {...props} childComponent={ChildComponent} requestURI={uri} />
-      )
+      if (!responseData) melody.get(uri)
+
+      return <WithResponseData {...props} childComponent={ChildComponent} requestURI={uri} responseData={responseData} />
     }
   }
 }

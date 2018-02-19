@@ -9,7 +9,7 @@ import { ServerStyleSheet } from 'styled-components'
 import melody from 'clients/melody'
 import store from 'store'
 
-import Application from '../components/Application'
+import Routing from '../components/Routing'
 
 function asDocument (document, sheet) {
   const rendered = DOM.renderToString(document)
@@ -45,17 +45,17 @@ export default function render (request: Object) {
     <Provider store={store}>
       <CookiesProvider cookies={new Cookies(request.header('Cookie'))}>
         <StaticRouter context={context} location={request.url}>
-          <Application />
+          <Routing />
         </StaticRouter>
       </CookiesProvider>
     </Provider>
   ))
 
-  // Okay, seriously - how do I prevent needing to render twice for collection
-  // requests to services?
+  // TODO: Okay, seriously - how do I prevent needing to render twice while
+  // still collection requests to services?
   DOM.renderToString(document)
 
   return melody
-    .awaitAllResponses()
+    .awaitPendingResponses()
     .then(renderResponse, renderResponse)
 }

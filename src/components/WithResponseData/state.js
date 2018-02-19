@@ -9,6 +9,6 @@ function mapStateToProps (state, ownProps) {
 }
 
 export default compose(
-  withState('responseData', 'setResponseData', null),
+  withState('responseData', 'setResponseData', props => props.responseData),
   connect(mapStateToProps)
 )

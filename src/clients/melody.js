@@ -2,8 +2,9 @@ import Promise from 'bluebird'
 
 import fetch from 'isomorphic-fetch'
 import store from 'store'
-import { RENDERING_ENVIRONMENT_SERVER } from 'constants'
+import { RENDERING_ENVIRONMENT_SERVER } from '../constants'
 
+// TODO: How can we batch these up on a per-request basis?
 const requestBuffer = new Set()
 const responseCache = new Map()
 
@@ -44,12 +45,10 @@ function verify (response) {
   return response.json()
 }
 
-function withServerEntries (url, options, promise) {
+function withServerSideCache (url, options, promise) {
   if (store.getState().environment !== RENDERING_ENVIRONMENT_SERVER) { return promise }
-
   requestBuffer.add(promise)
-
-  return promise.finally()
+  return promise
 }
 
 function cacheResources (response) {
@@ -82,12 +81,23 @@ function request (...parts) {
       .then(resolve)
       .catch(reject))
 
-  return withServerEntries(requestURL, requestOptions, promise)
+  return withServerSideCache(requestURL, requestOptions, promise)
+}
+
+function awaitPendingResponses() {
+  return Promise.all(requestBuffer).finally(response => {
+    for (const promise of Array.from(requestBuffer))
+      requestBuffer.remove(promise)
+
+    return response
+  })
 }
 
 export default {
+  awaitPendingResponses,
   getCached,
   request,
+  url,
 
   delete: request.bind(this, {method: 'DELETE'}),
   get: request.bind(this, {method: 'GET'}),
@@ -95,6 +105,4 @@ export default {
   options: request.bind(this, {method: 'OPTIONS'}),
   post: request.bind(this, {method: 'POST'}),
   put: request.bind(this, {method: 'PUT'}),
-
-  awaitAllResponses: () => Promise.all(requestBuffer)
 }

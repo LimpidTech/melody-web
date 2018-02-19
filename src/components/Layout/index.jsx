@@ -94,7 +94,6 @@ export default styled(Layout)`
 
     > main {
       max-width: 960px;
-      min-width: 42em;
       margin: 0 auto;
     }
 
