@@ -1,0 +1,12 @@
+# Log files
+*.log
+
+# Build artifacts
+dist
+
+# Project dependencies
+/node_modules/*
+
+# Non-git hidden files
+.*
+!.git*
