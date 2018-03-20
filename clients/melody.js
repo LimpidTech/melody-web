@@ -37,6 +37,20 @@ function verify (response) {
     )
   }
 
+  return response
+}
+
+function extractHeaders(response) {
+  const userData = {
+    isAuthenticated: response.headers.get('x-mdy-isauthenticated') !== 'False',
+    username: response.headers.get('x-mdy-username'),
+    identifier: response.headers.get('mdy-identifier'),
+  }
+
+  return response
+}
+
+function toJSON(response) {
   return response.json()
 }
 
@@ -55,6 +69,8 @@ function request (...parts) {
   return new Promise((resolve, reject) =>
     fetch(requestURL, requestOptions)
       .then(verify)
+      .then(extractHeaders)
+      .then(toJSON)
       .then(resolve)
       .catch(reject)
   )
