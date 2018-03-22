@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install dependencies
+          command: 'yarn'
+
+      - run:
+          name: Execute unit tests
+          command: 'yarn test'
+
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Build frontend
+          command: 'yarn build'

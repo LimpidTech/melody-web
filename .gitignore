@@ -10,3 +10,6 @@ dist
 # Non-git hidden files
 .*
 !.git*
+
+# Allow CircleCI configuration
+!.circleci
