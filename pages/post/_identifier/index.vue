@@ -10,7 +10,7 @@
 <script>
 import Post from '~/components/Post'
 
-import melody from '~/clients/melody'
+import metanic from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
 
@@ -22,7 +22,7 @@ export default {
     if (sessionid)
       options.headers = { Cookie: `sessionid=${sessionid};` }
 
-    return melody.get('post', params.identifier, options)
+    return metanic.get('post', params.identifier, options)
       .then(post => ({ post }))
       .catch(err => {throw err})
   },

@@ -3,7 +3,7 @@
     <header>
       <UserMenu />
       <Navigation />
-      <h2>Melody</h2>
+      <h2>Metanic</h2>
     </header>
 
     <main>
@@ -11,7 +11,7 @@
     </main>
 
     <footer>
-      <a href='https://github.com/MelodyBoard'>Melody</a>
+      <a href='https://github.com/MetanicBoard'>Metanic</a>
     </footer>
   </section>
 </template>

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import melody from '~/clients/melody'
+  import metanic from '~/clients/metanic'
 
   export default {
     data: () => ({
@@ -52,7 +52,7 @@
       submit (evt) {
         evt.preventDefault()
 
-        melody.post('authentication', {
+        metanic.post('authentication', {
           body: {
             username: this.username,
             password: this.password,

@@ -5,7 +5,7 @@
 <script>
 import Home from '~/components/Home'
 
-import melody from '~/clients/melody'
+import metanic from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
 
@@ -17,7 +17,7 @@ export default {
     if (sessionid)
       options.headers = { Cookie: `sessionid=${sessionid};` }
 
-    return melody.get('collection', 'recent_posts', options)
+    return metanic.get('collection', 'recent_posts', options)
       .then(collection => ({ collection }))
       .catch(err => {throw err})
   },

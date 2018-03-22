@@ -1,4 +1,4 @@
-## melody-web
+## metanic-web
 
 > Nuxt.js project
 

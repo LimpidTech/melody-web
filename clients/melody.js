@@ -33,7 +33,7 @@ function options (...parts) {
 function verify (response) {
   if (response.status < 200 || response.status > 299) {
     throw new Error(
-      'Received unexpected response from Melody services.'
+      'Received unexpected response from Metanic services.'
     )
   }
 

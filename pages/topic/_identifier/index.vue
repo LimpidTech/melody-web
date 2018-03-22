@@ -5,7 +5,7 @@
 <script>
 import Topic from '~/components/Topic'
 
-import melody from '~/clients/melody'
+import metanic from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
 
@@ -17,7 +17,7 @@ export default {
     if (sessionid)
       options.headers = { Cookie: `sessionid=${sessionid};` }
 
-    return melody.get('topic', params.identifier, options)
+    return metanic.get('topic', params.identifier, options)
       .then(topic => ({ topic }))
       .catch(err => {throw err})
   },
