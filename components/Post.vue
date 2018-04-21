@@ -24,8 +24,8 @@
       html: String,
       topics: [Array, {
         name: String,
-        url: String,
-      }],
+        url: String
+      }]
     }
   }
 </script>

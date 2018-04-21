@@ -5,7 +5,7 @@
 <script>
   export default {
     props: {
-      size: Number,
+      size: Number
     }
   }
 </script>

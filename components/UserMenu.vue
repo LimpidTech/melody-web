@@ -1,4 +1,19 @@
-<template><div /></template>
+<template>
+  <nav>
+    <li><h3>{{ lastRender }}</h3></li>
+  </nav>
+</template>
+
+<script>
+export default {
+  computed: {
+    lastRender() {
+      console.log(this.$store.state.something)
+      return parseInt(+(new Date()) / 150000000, 10)
+    }
+  }
+}
+</script>
 
 <style scoped>
   margin: 0.2em auto 1ex;

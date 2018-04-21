@@ -1,6 +1,3 @@
-import Vuex from 'vuex'
+import modules from './modules'
 
-export default () => new Vuex.Store({
-  state: {},
-  mutations: {},
-})
+export default { modules, namespaced: true }

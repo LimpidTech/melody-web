@@ -14,17 +14,16 @@ export default {
     const { sessionid } = cookies(req.headers.cookie)
     const options = {}
 
-    if (sessionid)
-      options.headers = { Cookie: `sessionid=${sessionid};` }
+    if (sessionid) { options.headers = { Cookie: `sessionid=${sessionid};` } }
 
     return metanic.get('topic', params.identifier, options)
       .then(topic => ({ topic }))
-      .catch(err => {throw err})
+      .catch(err => { throw err })
   },
 
   components: {
-    Topic,
-  },
+    Topic
+  }
 }
 </script>
 

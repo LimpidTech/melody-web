@@ -9,7 +9,7 @@ import Authenticator from '~/components/Authenticator'
 
 export default {
   components: {
-    Authenticator,
-  },
+    Authenticator
+  }
 }
 </script>

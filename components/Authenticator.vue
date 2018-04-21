@@ -45,21 +45,21 @@
   export default {
     data: () => ({
       username: '',
-      password: '',
+      password: ''
     }),
 
     methods: {
-      submit (evt) {
+      submit(evt) {
         evt.preventDefault()
 
         metanic.post('authentication', {
           body: {
             username: this.username,
-            password: this.password,
-          },
+            password: this.password
+          }
         })
       }
-    },
+    }
   }
 </script>
 

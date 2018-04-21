@@ -4,12 +4,12 @@ import fetch from 'isomorphic-fetch'
 
 const ROOT_ENDPOINT = 'http://localhost:8000/services/'
 
-function url (...parts) {
+function url(...parts) {
   if (parts.length === 0) return ROOT_ENDPOINT
   return ROOT_ENDPOINT + parts.join('/') + '/'
 }
 
-function options (...parts) {
+function options(...parts) {
   const options = Object.assign({
     method: 'POST',
     credentials: 'include',
@@ -30,7 +30,7 @@ function options (...parts) {
   return options
 }
 
-function verify (response) {
+function verify(response) {
   if (response.status < 200 || response.status > 299) {
     throw new Error(
       'Received unexpected response from Metanic services.'
@@ -41,11 +41,12 @@ function verify (response) {
 }
 
 function extractHeaders(response) {
-  const userData = {
-    isAuthenticated: response.headers.get('x-mdy-isauthenticated') !== 'False',
-    username: response.headers.get('x-mdy-username'),
-    identifier: response.headers.get('mdy-identifier'),
-  }
+  // TODO: Figure out user information
+  // const userData = {
+  //   isAuthenticated: response.headers.get('x-mdy-isauthenticated') !== 'False',
+  //   username: response.headers.get('x-mdy-username'),
+  //   identifier: response.headers.get('mdy-identifier')
+  // }
 
   return response
 }
@@ -54,7 +55,7 @@ function toJSON(response) {
   return response.json()
 }
 
-function request (...parts) {
+function request(...parts) {
   const urlParts = []
   const optionParts = []
 
@@ -85,5 +86,5 @@ export default {
   head: request.bind(this, {method: 'HEAD'}),
   options: request.bind(this, {method: 'OPTIONS'}),
   post: request.bind(this, {method: 'POST'}),
-  put: request.bind(this, {method: 'PUT'}),
+  put: request.bind(this, {method: 'PUT'})
 }
