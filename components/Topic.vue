@@ -15,12 +15,12 @@ import Post from '~/components/Post'
 
 export default {
   props: {
-    posts: Array
+    posts: Array,
   },
 
   components: {
-    Post
-  }
+    Post,
+  },
 }
 </script>
 

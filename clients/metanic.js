@@ -15,8 +15,8 @@ function options(...parts) {
     credentials: 'include',
     headers: [
       ['Accept', 'application/json'],
-      ['Content-Type', 'application/json']
-    ]
+      ['Content-Type', 'application/json'],
+    ],
   }, ...parts)
 
   // Ensure JSON is parsed
@@ -86,5 +86,5 @@ export default {
   head: request.bind(this, {method: 'HEAD'}),
   options: request.bind(this, {method: 'OPTIONS'}),
   post: request.bind(this, {method: 'POST'}),
-  put: request.bind(this, {method: 'PUT'})
+  put: request.bind(this, {method: 'PUT'}),
 }

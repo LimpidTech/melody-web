@@ -25,15 +25,15 @@ export default {
     link: [
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Didact+Gothic'
-      }
-    ]
+        href: 'https://fonts.googleapis.com/css?family=Didact+Gothic',
+      },
+    ],
   },
 
   components: {
     Navigation,
-    UserMenu
-  }
+    UserMenu,
+  },
 }
 </script>
 

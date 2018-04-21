@@ -10,7 +10,7 @@ import metanic from '~/clients/metanic'
 import cookies from '~/helpers/cookies'
 
 export default {
-  asyncData({req}) {
+  asyncData({ req }) {
     const { sessionid } = cookies(req.headers.cookie)
     const options = {}
 
@@ -22,7 +22,7 @@ export default {
   },
 
   components: {
-    Home
-  }
+    Home,
+  },
 }
 </script>
