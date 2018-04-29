@@ -26,19 +26,23 @@ function options(...parts) {
   if (
     typeof options.body === 'undefined' ||
     typeof options.body === 'string'
-  ) return options
+  ) {
+    return options
+  }
 
-  options.body = JSON.stringify(options.body)
+  if (typeof options.body === 'object') {
+    options.body = JSON.stringify(options.body)
+  }
 
   return options
 }
 
 function verify(response) {
-  if (response.status < 500 || response.status > 399) {
+  if (response.status < 500 && response.status > 399) {
     throw new RequestError(
       'Unexpected or malformed data was sent to the server.'
     )
-  } else if (response.status < 200 || response.status > 299) {
+  } else if (response.status < 200 && response.status > 299) {
     throw new ServerError(
       'Received unexpected response from Metanic services.'
     )
