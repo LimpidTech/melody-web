@@ -52,18 +52,25 @@ function verify(response) {
 }
 
 function extractHeaders(response) {
-  // TODO: Figure out user information
-  // const userData = {
-  //   isAuthenticated: response.headers.get('x-mdy-isauthenticated') !== 'False',
-  //   username: response.headers.get('x-mdy-username'),
-  //   identifier: response.headers.get('mdy-identifier')
-  // }
+  return {
+    response,
 
-  return response
+    metadata: {
+      user: {
+        isAuthenticated: response.headers.get('x-mdy-isauthenticated') !== 'False',
+        username: response.headers.get('x-mdy-username'),
+        identifier: response.headers.get('mdy-identifier'),
+      },
+    },
+  }
 }
 
-function toJSON(response) {
-  return response.json()
+function toJSON(context) {
+  return context.response.json().then(data => ({
+    ...context,
+
+    data,
+  }))
 }
 
 function request(...parts) {

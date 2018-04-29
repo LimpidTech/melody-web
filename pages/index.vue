@@ -8,22 +8,30 @@ import Home from '~/components/Home'
 import metanic from '~/clients/metanic'
 import cookies from '~/helpers/cookies'
 
+function getWrappedData(context, {data, metadata}) {
+  Object.assign(context, {
+    metanic: metadata,
+  })
+
+  return {data}
+}
+
 export default {
-  asyncData({ req }) {
+  asyncData(context) {
     const options = {}
 
-    if (req.headers.cookie) {
-      const { sessionid } = cookies(req.headers.cookie)
+    if (context.req.headers.cookie) {
+      const { sessionid } = cookies(context.req.headers.cookie)
+
       if (sessionid) {
         options.headers = { Cookie: `sessionid=${sessionid};` }
       }
     }
 
     return metanic.get('collection', 'recent_posts', options)
-      .then(collection => ({ collection }))
-      .catch(err => {
-        throw err
-      })
+      .then(result => getWrappedData(context, result))
+      .then(({ data }) => ({collection: data}))
+      .catch(err => { throw err })
   },
 
   components: {
