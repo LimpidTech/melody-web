@@ -13,3 +13,7 @@ dist
 
 # Allow CircleCI configuration
 !.circleci
+
+# Linting, intendation, etc
+!.eslintrc.js
+!.editorconfig
