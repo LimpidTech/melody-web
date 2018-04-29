@@ -4,6 +4,9 @@ import fetch from 'isomorphic-fetch'
 
 const ROOT_ENDPOINT = 'http://localhost:8000/services/'
 
+class RequestError extends Error {}
+class ServerError extends Error {}
+
 function url(...parts) {
   if (parts.length === 0) return ROOT_ENDPOINT
   return ROOT_ENDPOINT + parts.join('/') + '/'
@@ -31,8 +34,12 @@ function options(...parts) {
 }
 
 function verify(response) {
-  if (response.status < 200 || response.status > 299) {
-    throw new Error(
+  if (response.status < 500 || response.status > 399) {
+    throw new RequestError(
+      'Unexpected or malformed data was sent to the server.'
+    )
+  } else if (response.status < 200 || response.status > 299) {
+    throw new ServerError(
       'Received unexpected response from Metanic services.'
     )
   }
@@ -87,4 +94,7 @@ export default {
   options: request.bind(this, {method: 'OPTIONS'}),
   post: request.bind(this, {method: 'POST'}),
   put: request.bind(this, {method: 'PUT'}),
+
+  RequestError,
+  ServerError,
 }
