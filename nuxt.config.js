@@ -35,7 +35,7 @@ module.exports = {
 
   env: {
     metanic: {
-      servicesUrl: getSetting('services_url', 'http://localhost:8000'),
+      servicesUrl: getSetting('services_url', 'https://services.metanic.org/'),
     },
   },
 }
