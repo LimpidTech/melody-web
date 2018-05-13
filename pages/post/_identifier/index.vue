@@ -23,7 +23,7 @@ export default {
       options.headers = { Cookie: `sessionid=${sessionid};` }
     }
 
-    return metanic.get('post', params.identifier, options)
+    return metanic.get(req, 'post', params.identifier, options)
       .then(post => ({ post }))
       .catch(err => {
         throw err

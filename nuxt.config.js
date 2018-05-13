@@ -1,4 +1,4 @@
-function getSetting(name, defaultValue) {
+function setting(name, defaultValue) {
   return process.env[`METANIC_${name.toUpperCase()}`] || defaultValue
 }
 
@@ -33,9 +33,13 @@ module.exports = {
     },
   },
 
+  router: {
+    middleware: 'metanic',
+  },
+
   env: {
     metanic: {
-      servicesUrl: getSetting('services_url', 'https://services.metanic.org/'),
+      servicesUrl: setting('services_url', 'https://services.metanic.org/'),
     },
   },
 

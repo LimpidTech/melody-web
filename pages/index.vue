@@ -20,6 +20,8 @@ export default {
   asyncData(context) {
     const options = {}
 
+    metanic.set('root', context.env.metanic.servicesUrl)
+
     if (context.req.headers.cookie) {
       const { sessionid } = cookies(context.req.headers.cookie)
 
@@ -28,7 +30,7 @@ export default {
       }
     }
 
-    return metanic.get('collection', 'recent_posts', options)
+    return metanic.get(context.req, 'collection', 'recent_posts', options)
       .then(result => getWrappedData(context, result))
       .then(({ data }) => ({collection: data}))
       .catch(err => { throw err })

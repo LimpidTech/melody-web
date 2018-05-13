@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "cross-env PORT=3030 nuxt",
+    "dev": "cross-env PORT=3030 cross-env METANIC_SERVICES_URL=http://localhost:8000/services/ nuxt",
     "generate": "nuxt generate",
     "heroku-postbuild": "npm run build",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
