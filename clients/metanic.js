@@ -38,8 +38,6 @@ function options(...parts) {
 }
 
 function verify(response) {
-  console.dir(response)
-
   if (response.status < 500 && response.status > 399) {
     throw new RequestError(
       'Unexpected or malformed data was sent to the server.'
