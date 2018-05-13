@@ -38,4 +38,8 @@ module.exports = {
       servicesUrl: getSetting('services_url', 'https://services.metanic.org/'),
     },
   },
+
+  generate: {
+    fallback: true,
+  },
 }
