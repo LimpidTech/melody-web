@@ -11,7 +11,10 @@
     </main>
 
     <footer>
-      <a href='https://github.com/MetanicBoard'>Metanic</a>
+      <a href="https://www.patreon.com/bePatron?u=11225766"
+         data-patreon-widget-type="become-patron-button">
+         Become a Patron!
+      </a>
     </footer>
   </section>
 </template>
