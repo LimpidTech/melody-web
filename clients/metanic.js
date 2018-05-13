@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch'
 
 const settings = {
   sessionCookie: process.env.METANIC_SESSION_COOKIE || 'sessionid',
-  root: process.env.METANIC_SERVICES_URL || 'https://services.metanic.org/',
+  root: process.env.METANIC_SERVICES_URL || 'http://localhost:8000/services/',
 }
 
 function set(key, value) { settings[key] = value }
@@ -89,13 +89,13 @@ function options(request, ...parts) {
 function verify(response) {
   if (response.status > 399 && response.status < 500) {
     throw new RequestError(
-      'Unexpected or malformed data was sent to the server.'
+      'Unexpected or malformed data was sent to ' + response.url
     )
   }
 
   if (response.status > 299 || response.status < 200) {
     throw new ServerError(
-      'Received unexpected response from Metanic services.'
+      'Received unexpected response from ' + response.url
     )
   }
 
