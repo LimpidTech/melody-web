@@ -8,18 +8,17 @@
         <h3>Sign up</h3>
       </header>
 
-      <Label header='Create a username'>
-        <Input tabIndex=1
-              type='text'
-              name='username'
-              placeholder='your username'
-              v-model='username'
+      <Label header='Enter your e-mail address'>
+        <input tabIndex=1
+              type='email'
+              name='email'
+              placeholder='your e-mail address'
+              v-model='email'
         />
-        {{ username }}
       </Label>
 
       <Label header='Create a password'>
-        <Input tabIndex=2
+        <input tabIndex=2
               type='password'
               name='password'
               placeholder='your password'
@@ -28,7 +27,7 @@
       </Label>
 
       <Label header='Verify your password'>
-        <Input tabIndex=3
+        <input tabIndex=3
               name='password_verification'
               type='password'
               placeholder='verify your password'
@@ -36,8 +35,17 @@
         />
       </Label>
 
+      <Label header='Create a username'>
+        <input tabIndex=1
+              type='text'
+              name='username'
+              placeholder='your username'
+              v-model='username'
+        />
+      </Label>
+
       <div>
-        <Input tabIndex=4
+        <input tabIndex=4
                type='submit'
                value='Register'
         />
@@ -66,6 +74,7 @@ export default {
     username: '',
     password: '',
     passwordVerification: '',
+    email: '',
   }),
 
   methods: {
@@ -74,9 +83,10 @@ export default {
 
       metanic.post('user', {
         body: {
-          username: this.username,
+          email: this.email,
           password: this.password,
           password_verification: this.passwordVerification,
+          username: this.username,
         },
       })
     },
