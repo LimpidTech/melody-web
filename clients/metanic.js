@@ -2,7 +2,7 @@ import Promise from 'bluebird'
 
 import fetch from 'isomorphic-fetch'
 
-const ROOT_ENDPOINT = 'http://localhost:8000/services/'
+const ROOT_ENDPOINT = process.env.METANIC_SERVICES_URL || 'https://services.metanic.org/'
 
 class RequestError extends Error {}
 class ServerError extends Error {}
