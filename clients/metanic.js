@@ -38,6 +38,8 @@ function options(...parts) {
 }
 
 function verify(response) {
+  console.dir(response)
+
   if (response.status < 500 && response.status > 399) {
     throw new RequestError(
       'Unexpected or malformed data was sent to the server.'
@@ -57,9 +59,9 @@ function extractHeaders(response) {
 
     metadata: {
       user: {
-        isAuthenticated: response.headers.get('x-mdy-isauthenticated') !== 'False',
-        username: response.headers.get('x-mdy-username'),
-        identifier: response.headers.get('mdy-identifier'),
+        isAuthenticated: response.headers.get('x-metanic-isauthenticated') === 'True',
+        username: response.headers.get('x-metanic-username'),
+        identifier: response.headers.get('x-metanic-identifier'),
       },
     },
   }
