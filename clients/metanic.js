@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch'
 
 const settings = {
   sessionCookie: process.env.METANIC_SESSION_COOKIE || 'sessionid',
-  root: process.env.METANIC_SERVICES_URL || 'http://localhost:8000/services/',
+  root: process.env.METANIC_SERVICES_URL || 'https://services.metanic.org/',
 }
 
 function set(key, value) { settings[key] = value }
