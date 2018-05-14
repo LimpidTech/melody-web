@@ -5,13 +5,15 @@
 <script>
 import Topic from '~/components/Topic'
 
-import metanic from '~/clients/metanic'
+import { Metanic } from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
 
 export default {
   asyncData({ req, params }) {
     const { sessionid } = cookies(req.headers.cookie)
+
+    const metanic = new Metanic(req)
     const options = {}
 
     if (sessionid) {

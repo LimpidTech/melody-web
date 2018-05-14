@@ -40,7 +40,9 @@
 </template>
 
 <script>
-  import metanic from '~/clients/metanic'
+  import { Metanic } from '~/clients/metanic'
+
+  const metanic = new Metanic()
 
   export default {
     data: () => ({
@@ -52,7 +54,7 @@
       submit(evt) {
         evt.preventDefault()
 
-        metanic.post('authentication', {
+        metanic.post(null, 'authentication', {
           body: {
             username: this.username,
             password: this.password,

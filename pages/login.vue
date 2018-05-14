@@ -13,8 +13,8 @@ export default {
     Authenticator,
   },
 
-  fetch(context) {
-    metanic.set('root', context.env.metanic.servicesUrl)
+  fetch({ env }) {
+    metanic.set('root', env.metanic.servicesUrl)
   },
 }
 </script>

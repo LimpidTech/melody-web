@@ -4,14 +4,56 @@ import fetch from 'isomorphic-fetch'
 
 const settings = {
   sessionCookie: process.env.METANIC_SESSION_COOKIE || 'sessionid',
-  root: process.env.METANIC_SERVICES_URL || 'https://services.metanic.org/',
+  root: process.env.METANIC_SERVICES_URL || 'http://localhost:8000/services/',
 }
 
-class RequestError extends Error {}
-class ServerError extends Error {}
+function set(key, value) { settings[key] = value }
 
-function set(key, value) {
-  settings[key] = value
+export class RequestError extends Error {}
+export class ServerError extends Error {}
+
+export class Metanic {
+  constructor(request) {
+    this.requestInfo = request
+  }
+
+  request(...parts) {
+    const { url, options } = extractRequestComponents(this.requestInfo, ...parts)
+    if (this.requestInfo) options.headers = withAuthentication(this.requestInfo, options.headers)
+
+    return new Promise((resolve, reject) =>
+      fetch(url, options)
+        .then(verify)
+        .then(extractHeaders)
+        .then(toJSON)
+        .then(resolve)
+        .catch(reject)
+    )
+  }
+
+  delete(...options) { return this.request(...options, {method: 'DELETE'}) }
+  get(...options) { return this.request(...options, {method: 'GET'}) }
+  head(...options) { return this.request(...options, {method: 'HEAD'}) }
+  options(...options) { return this.request(...options, {method: 'OPTIONS'}) }
+  post(...options) { return this.request(...options, {method: 'POST'}) }
+  put(...options) { return this.request(...options, {method: 'PUT'}) }
+}
+
+export default { set }
+
+function extractRequestComponents(request, ...parts) {
+  const urlParts = []
+  const optionParts = []
+
+  for (const part of parts) {
+    if (typeof part === 'string') urlParts.push(part)
+    else optionParts.push(part)
+  }
+
+  return {
+    url: url(...urlParts),
+    options: options(request, ...optionParts),
+  }
 }
 
 function url(...parts) {
@@ -125,52 +167,4 @@ function withAuthentication(request, headers) {
 
   result.push(cookie)
   return result
-}
-
-function extractRequestComponents(...parts) {
-  const urlParts = []
-  const optionParts = []
-
-  for (const part of parts) {
-    if (typeof part === 'string') urlParts.push(part)
-    else optionParts.push(part)
-  }
-
-  return {
-    url: url(...urlParts),
-    options: options(...optionParts),
-  }
-}
-
-function request(request, ...parts) {
-  const { url, options } = extractRequestComponents(...parts)
-
-  if (request) {
-    options.headers = withAuthentication(request, options.headers)
-  }
-
-  return new Promise((resolve, reject) =>
-    fetch(url, options)
-      .then(verify)
-      .then(extractHeaders)
-      .then(toJSON)
-      .then(resolve)
-      .catch(reject)
-  )
-}
-
-export default {
-  RequestError,
-  ServerError,
-
-  request,
-  set,
-  url,
-
-  delete: (req, ...options) => request(req, ...options, {method: 'DELETE'}),
-  get: (req, ...options) => request(req, ...options, {method: 'GET'}),
-  head: (req, ...options) => request(req, ...options, {method: 'HEAD'}),
-  options: (req, ...options) => request(req, ...options, {method: 'OPTIONS'}),
-  post: (req, ...options) => request(req, ...options, {method: 'POST'}),
-  put: (req, ...options) => request(req, ...options, {method: 'PUT'}),
 }

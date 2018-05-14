@@ -1,4 +1,6 @@
-import metanic from '~/clients/metanic'
+import { Metanic } from '~/clients/metanic'
+
+const metanic = new Metanic()
 
 export const state = () => ({})
 

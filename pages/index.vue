@@ -4,9 +4,9 @@
 
 <script>
 import Home from '~/components/Home'
-
-import metanic from '~/clients/metanic'
 import cookies from '~/helpers/cookies'
+
+import { Metanic } from '~/clients/metanic'
 
 function getWrappedData(context, {data, metadata}) {
   Object.assign(context, {
@@ -19,8 +19,7 @@ function getWrappedData(context, {data, metadata}) {
 export default {
   asyncData(context) {
     const options = {}
-
-    metanic.set('root', context.env.metanic.servicesUrl)
+    const metanic = new Metanic(context.req)
 
     if (context.req.headers.cookie) {
       const { sessionid } = cookies(context.req.headers.cookie)
