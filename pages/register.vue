@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Authenticator />
+    <Registration />
   </div>
 </template>
 
 <script>
-import Authenticator from '~/components/Authenticator'
+import Registration from '~/components/Registration'
 
 export default {
   components: {
-    Authenticator,
+    Registration,
   },
 }
 </script>
