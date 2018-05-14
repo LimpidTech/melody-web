@@ -17,3 +17,6 @@ dist
 # Linting, intendation, etc
 !.eslintrc.js
 !.editorconfig
+
+# Development environment settings
+!.env

@@ -6,10 +6,10 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "cross-env PORT=3030 cross-env METANIC_SERVICES_URL=http://localhost:8000/services/ nuxt",
-    "generate": "nuxt generate",
-    "heroku-postbuild": "npm run build",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "dev": "env-cmd --no-override .env nuxt",
+    "generate": "env-cmd --no-override .env nuxt generate",
+    "heroku-postbuild": "env-cmd --no-override .env npm run build",
+    "lint": "env-cmd --no-override .env eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "start": "nuxt start",
     "test": "true"
@@ -20,7 +20,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "chai": "^4.1.2",
-    "cross-env": "^5.1.3",
+    "env-cmd": "^8.0.1",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^3.0.0",
