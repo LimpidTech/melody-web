@@ -6,7 +6,7 @@
       </h2>
     </header>
 
-    <div>{{ html }}</div>
+    <div v-html="html"></div>
 
     <footer>
       <a v-for="topic in topics" :key="topic.url" href='#'>
