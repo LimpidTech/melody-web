@@ -149,8 +149,6 @@ function request(request, ...parts) {
     options.headers = withAuthentication(request, options.headers)
   }
 
-  console.log(url, options)
-
   return new Promise((resolve, reject) =>
     fetch(url, options)
       .then(verify)
