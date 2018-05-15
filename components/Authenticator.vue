@@ -73,7 +73,7 @@
       submit(evt) {
         evt.preventDefault()
 
-        metanic.post(null, 'authentication', {
+        metanic.post('authentication', {
           body: {
             username: this.username,
             password: this.password,
