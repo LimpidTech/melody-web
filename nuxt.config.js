@@ -6,15 +6,6 @@ function withSentry(configuration) {
   if (process.env.SENTRY_PRIVATE_KEY) {
     configuration.modules = configuration.modules || []
     configuration.modules.push('@nuxtjs/sentry')
-
-    Object.assign(configuration, {
-      sentry: {
-        public_key: process.env.SENTRY_PUBLIC_KEY,
-        private_key: process.env.SENTRY_PRIVATE_KEY,
-        project_id: process.env.SENTRY_PROJECT_ID,
-        config: {},
-      },
-    })
   }
 
   return configuration
