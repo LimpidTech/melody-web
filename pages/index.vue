@@ -29,7 +29,7 @@ export default {
       }
     }
 
-    return metanic.get(context.req, 'collection', 'recent_posts', options)
+    return metanic.get('collection', 'recent_posts', options)
       .then(result => getWrappedData(context, result))
       .then(({ data }) => ({collection: data}))
       .catch(err => { throw err })
