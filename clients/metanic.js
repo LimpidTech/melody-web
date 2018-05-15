@@ -2,23 +2,65 @@ import Promise from 'bluebird'
 
 import fetch from 'isomorphic-fetch'
 
-const settings = {
-  sessionCookie: process.env.METANIC_SESSION_COOKIE || 'sessionid',
-  root: process.env.METANIC_SERVICES_URL || 'https://services.metanic.org/',
-}
-
-function set(key, value) { settings[key] = value }
+const METANIC_SESSION_COOKIE = 'sessionid'
 
 export class RequestError extends Error {}
 export class ServerError extends Error {}
 
 export class Metanic {
   constructor(request) {
+    this.root = process.env.metanic.servicesUrl
     this.requestInfo = request
   }
 
+  url(...parts) {
+    if (parts.length === 0) return this.root
+    return this.root + parts.join('/') + '/'
+  }
+
+  optionData(...parts) {
+    const options = Object.assign({
+      method: 'POST',
+      credentials: 'include',
+      headers: [
+        ['Accept', 'application/json'],
+        ['Content-Type', 'application/json'],
+      ],
+    }, ...parts)
+
+    if (this.requestInfo && this.requestInfo.headers) {
+      if (!this.requestInfo.headers.cookie) this.requestInfo.headers.cookie = ''
+      this.requestInfo.headers.cookie += ';sessionid='
+    }
+
+    if (!options.body) return options
+    if (typeof options.body === 'string') return options
+
+    if (typeof options.body === 'object') {
+      options.body = JSON.stringify(options.body)
+    }
+
+    return options
+  }
+
+  extractRequestComponents(...parts) {
+    const urlParts = []
+    const optionParts = []
+
+    for (const part of parts) {
+      if (typeof part === 'string') urlParts.push(part)
+      else optionParts.push(part)
+    }
+
+    return {
+      url: this.url(...urlParts),
+      options: this.optionData(...optionParts),
+    }
+  }
+
   request(...parts) {
-    const { url, options } = extractRequestComponents(this.requestInfo, ...parts)
+    const { url, options } = this.extractRequestComponents(...parts)
+
     if (this.requestInfo) options.headers = withAuthentication(this.requestInfo, options.headers)
 
     return new Promise((resolve, reject) =>
@@ -37,53 +79,6 @@ export class Metanic {
   options(...options) { return this.request(...options, {method: 'OPTIONS'}) }
   post(...options) { return this.request(...options, {method: 'POST'}) }
   put(...options) { return this.request(...options, {method: 'PUT'}) }
-}
-
-export default { set }
-
-function extractRequestComponents(request, ...parts) {
-  const urlParts = []
-  const optionParts = []
-
-  for (const part of parts) {
-    if (typeof part === 'string') urlParts.push(part)
-    else optionParts.push(part)
-  }
-
-  return {
-    url: url(...urlParts),
-    options: options(request, ...optionParts),
-  }
-}
-
-function url(...parts) {
-  if (parts.length === 0) return settings.root
-  return settings.root + parts.join('/') + '/'
-}
-
-function options(request, ...parts) {
-  const options = Object.assign({
-    method: 'POST',
-    credentials: 'include',
-    headers: [
-      ['Accept', 'application/json'],
-      ['Content-Type', 'application/json'],
-    ],
-  }, ...parts)
-
-  if (request && request.headers) {
-    if (!request.headers.cookie) request.headers.cookie = ''
-    request.headers.cookie += ';sessionid='
-  }
-
-  if (!options.body) return options
-  if (typeof options.body === 'string') return options
-
-  if (typeof options.body === 'object') {
-    options.body = JSON.stringify(options.body)
-  }
-
-  return options
 }
 
 function verify(response) {
@@ -126,10 +121,10 @@ function toJSON(context) {
 function getRequestSession(cookie) {
   if (!cookie) return
 
-  const sessionIndex = cookie.indexOf(settings.sessionCookie)
+  const sessionIndex = cookie.indexOf(METANIC_SESSION_COOKIE)
   if (sessionIndex === -1) return
 
-  const sessionValueIndex = sessionIndex + settings.sessionCookie.length + 1
+  const sessionValueIndex = sessionIndex + METANIC_SESSION_COOKIE.length + 1
   const sessionValueWithSuffix = cookie.slice(sessionValueIndex)
 
   const sessionValueEndIndex = sessionValueWithSuffix.indexOf(';')
@@ -157,7 +152,7 @@ function withAuthentication(request, headers) {
     }
   }
 
-  const sessionString = `${settings.sessionCookie}=${sessionId}`
+  const sessionString = `${METANIC_SESSION_COOKIE}=${sessionId}`
 
   if (cookie[1].length > 0) {
     cookie[1] += sessionString

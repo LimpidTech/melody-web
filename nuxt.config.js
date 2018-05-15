@@ -42,9 +42,7 @@ module.exports = withSentry({
     },
   },
 
-  router: {
-    middleware: 'metanic',
-  },
+  router: {},
 
   env: {
     metanic: {
