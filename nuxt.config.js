@@ -46,7 +46,7 @@ module.exports = withSentry({
 
   env: {
     metanic: {
-      servicesUrl: setting('services_url', 'https://services.metanic.org/'),
+      servicesUrl: setting('services_url', 'https://metanic.services/'),
     },
   },
 
