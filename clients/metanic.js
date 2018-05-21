@@ -2,7 +2,8 @@ import Promise from 'bluebird'
 
 import fetch from 'isomorphic-fetch'
 
-const METANIC_SESSION_COOKIE = 'sessionid'
+const METANIC_SESSION_COOKIE = process.env.METANIC_SESSION_COOKIE
+const METANIC_SERVICES_URL = process.env.METANIC_SERVICES_URL
 
 export class RequestError extends Error {}
 export class ServerError extends Error {}
@@ -134,6 +135,8 @@ function getRequestSession(cookie) {
 }
 
 function withAuthentication(request, headers) {
+  /** TODO: Use JWT **/
+
   if (!request.header || !request.header.cookie) return headers
 
   const sessionId = getRequestSession(request.headers.cookie)
