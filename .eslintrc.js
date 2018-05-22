@@ -1,3 +1,8 @@
+const ifDebug = (isTrue, isFalse) => {
+  if (process.env.NODE_ENV === 'production') return isTrue || 2;
+  else return isFalse || 0;
+}
+
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -13,6 +18,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'comma-dangle': [2, 'always-multiline'],
+    'no-debugger': ifDebug(false),
     'padded-blocks': [2, {
       blocks: 'never',
       classes: 'never',
