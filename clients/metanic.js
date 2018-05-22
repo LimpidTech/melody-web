@@ -2,15 +2,12 @@ import Promise from 'bluebird'
 
 import fetch from 'isomorphic-fetch'
 
-const METANIC_SESSION_COOKIE = process.env.METANIC_SESSION_COOKIE
-const METANIC_SERVICES_URL = process.env.METANIC_SERVICES_URL
-
 export class RequestError extends Error {}
 export class ServerError extends Error {}
 
 export class Metanic {
   constructor(request) {
-    this.root = process.env.metanic.servicesUrl
+    this.root = process.env.METANIC_SERVICES_URL
     this.requestInfo = request
   }
 
@@ -119,28 +116,10 @@ function toJSON(context) {
   }))
 }
 
-function getRequestSession(cookie) {
-  if (!cookie) return
-
-  const sessionIndex = cookie.indexOf(METANIC_SESSION_COOKIE)
-  if (sessionIndex === -1) return
-
-  const sessionValueIndex = sessionIndex + METANIC_SESSION_COOKIE.length + 1
-  const sessionValueWithSuffix = cookie.slice(sessionValueIndex)
-
-  const sessionValueEndIndex = sessionValueWithSuffix.indexOf(';')
-  if (sessionValueEndIndex === -1) return sessionValueWithSuffix
-
-  return sessionValueEndIndex.slice(0, sessionValueEndIndex)
-}
-
 function withAuthentication(request, headers) {
-  /** TODO: Use JWT **/
-
   if (!request.header || !request.header.cookie) return headers
 
-  const sessionId = getRequestSession(request.headers.cookie)
-  if (!sessionId) return headers
+  /** TODO: Use JWT **/
 
   const cookie = ['Cookie', '']
   const result = []
@@ -148,20 +127,14 @@ function withAuthentication(request, headers) {
   headers = headers || []
 
   for (const headerInfo of headers) {
-    if (headerInfo[0].toLowerCase() !== 'cookie') {
+    if (headerInfo[0].toLowerCase() !== 'authentication') {
       result.push(headerInfo)
     } else {
       cookie[1] = headerInfo[1]
     }
   }
 
-  const sessionString = `${METANIC_SESSION_COOKIE}=${sessionId}`
-
-  if (cookie[1].length > 0) {
-    cookie[1] += sessionString
-  } else {
-    cookie[1] = sessionString
-  }
+  if (!cookie[1]) cookie[1] = 'Bearer '
 
   result.push(cookie)
   return result

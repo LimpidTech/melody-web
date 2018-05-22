@@ -1,5 +1,8 @@
 function setting(name, defaultValue) {
-  return process.env[`METANIC_${name.toUpperCase()}`] || defaultValue
+  const envName = `METANIC_${name.toUpperCase()}`
+  const envValue = process.env[envName]
+  if (!envValue && typeof defaultValue === 'undefined') throw new Error(`${envName} must be set.`)
+  return envValue || defaultValue
 }
 
 function withSentry(configuration) {
@@ -42,12 +45,8 @@ module.exports = withSentry({
     },
   },
 
-  router: {},
-
   env: {
-    metanic: {
-      servicesUrl: setting('services_url', 'https://metanic.services/'),
-    },
+    METANIC_SERVICES_URL: setting('services_url', 'https://metanic.services/'),
   },
 
   generate: {
