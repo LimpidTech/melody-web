@@ -19,4 +19,4 @@ dist
 !.editorconfig
 
 # Development environment settings
-!.env
+!.env.development
