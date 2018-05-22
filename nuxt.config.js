@@ -45,6 +45,10 @@ module.exports = withSentry({
     },
   },
 
+  router: {
+    middleware: 'hsts',
+  },
+
   env: {
     METANIC_SERVICES_URL: setting('services_url', 'https://metanic.services/'),
   },
