@@ -54,10 +54,6 @@
   import Label from '~/components/Label'
   import Input from '~/components/Input'
 
-  import { Metanic } from '~/clients/metanic'
-
-  const metanic = new Metanic()
-
   export default {
     components: {
       Label,
@@ -72,12 +68,9 @@
     methods: {
       submit(evt) {
         evt.preventDefault()
-
-        metanic.post('authentication', {
-          body: {
-            username: this.username,
-            password: this.password,
-          },
+        this.$store.dispatch('authenticate', {
+          username: this.username,
+          password: this.password,
         })
       },
     },

@@ -4,15 +4,24 @@ const metanic = new Metanic()
 
 export const state = () => ({})
 
-export const mutations = {}
+export const getters = {
+  authenticationToken: state => state.authenticationToken,
+}
+
+export const mutations = {
+  setAuthenticationToken: (state, token) => {
+    if (!process.browser) return
+    localStorage.setItem('authentication:token', token)
+    state.authenticationToken = token
+  },
+}
 
 export const actions = {
   nuxtServerInit: context => {},
-
-  'account/authenticate': (identifer, secret) => metanic.post('authentication', {
-    body: {
-      username: this.username,
-      password: secret,
-    },
-  }),
+  authenticate: ({ commit }, data) => {
+    metanic.post('jwt', {body: data})
+      .then(({ data }) => {
+        commit('setAuthenticationToken', data.token)
+      })
+  },
 }
