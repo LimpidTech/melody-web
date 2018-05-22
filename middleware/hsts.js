@@ -2,7 +2,7 @@
 export default ({res}) => {
   if (process.env.NODE_ENV === 'production') {
     res.setHeader(
-      'Strict-Transport-Policy',
+      'Strict-Transport-Security',
       'mag-age=31557600; includeSubDomains; preload'
     )
   }
