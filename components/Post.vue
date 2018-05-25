@@ -7,7 +7,7 @@
 
       <h4>
         Published by {{ author.username }}
-          at {{ createdTime }}
+          {{ createdTime }}
           <span v-if=createdDate>on {{ createdDate }}</span>
       </h4>
     </header>
@@ -62,8 +62,14 @@
       },
 
       createdTime: function () {
+        const now = moment()
         const created = moment(this.created)
-        return created.format('LT')
+
+        if (now.format(moment.HTML5_FMT.DATE) !== created.format(moment.HTML5_FMT.DATE)) {
+          return created.format('LT')
+        }
+
+        return created.fromNow()
       },
     },
   }
