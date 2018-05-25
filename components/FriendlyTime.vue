@@ -18,7 +18,7 @@
         const prefix = this.prefix || 'at'
 
         if (now.format(moment.HTML5_FMT.DATE) !== date.format(moment.HTML5_FMT.DATE)) {
-          return prefix + ' ' + date.format('LT')
+          return ' ' + prefix + ' ' + date.format('LT')
         }
 
         return date.fromNow()

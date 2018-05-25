@@ -30,14 +30,14 @@
       friendlyDate: function () {
         const now = moment()
         const date = moment(this.date)
-        const prefix = this.datePrefix || 'on '
+        const prefix = this.datePrefix || ' on '
 
         if (now.format(moment.HTML5_FMT.DATE) === date.format(moment.HTML5_FMT.DATE)) {
           return
         }
 
         if (now.format(moment.HTML5_FMT.WEEK) === date.format(moment.HTML5_FMT.WEEK)) {
-          return prefix + date.format('dddd')
+          return ' ' + prefix + ' ' + date.format('dddd')
         }
 
         return date.format(moment.HTML5_FMT.DATE)
