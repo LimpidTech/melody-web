@@ -56,6 +56,11 @@ body {
   max-width: 68rem;
 }
 
+h4, h5, h6 {
+  font-weight: normal;
+  font-style: normal;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
