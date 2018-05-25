@@ -6,9 +6,7 @@
       </h2>
 
       <h4>
-        Published by {{ author.username }}
-          {{ createdTime }}
-          <span v-if=createdDate>on {{ createdDate }}</span>
+        Published by {{ author.username }} <FriendlyDate :date=created />
       </h4>
     </header>
 
@@ -23,9 +21,13 @@
 </template>
 
 <script>
-  import moment from 'moment'
+  import FriendlyDate from '~/components/FriendlyDate'
 
   export default {
+    components: {
+      FriendlyDate,
+    },
+
     props: {
       url: String,
 
@@ -43,34 +45,6 @@
         name: String,
         url: String,
       }],
-    },
-
-    computed: {
-      createdDate: function () {
-        const now = moment()
-        const created = moment(this.created)
-
-        if (now.format(moment.HTML5_FMT.DATE) === created.format(moment.HTML5_FMT.DATE)) {
-          return
-        }
-
-        if (now.format(moment.HTML5_FMT.WEEK) === created.format(moment.HTML5_FMT.WEEK)) {
-          return created.format('dddd')
-        }
-
-        return created.format(moment.HTML5_FMT.DATE)
-      },
-
-      createdTime: function () {
-        const now = moment()
-        const created = moment(this.created)
-
-        if (now.format(moment.HTML5_FMT.DATE) !== created.format(moment.HTML5_FMT.DATE)) {
-          return created.format('LT')
-        }
-
-        return created.fromNow()
-      },
     },
   }
 </script>
