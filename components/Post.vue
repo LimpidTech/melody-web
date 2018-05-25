@@ -4,6 +4,12 @@
       <h2>
         <a :href="url">{{ subject }}</a>
       </h2>
+
+      <h4>
+        Published by {{ author.username }}
+          at {{ createdTime }}
+          <span v-if=createdDate>on {{ createdDate }}</span>
+      </h4>
     </header>
 
     <div v-html="html"></div>
@@ -17,23 +23,85 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
     props: {
       url: String,
+
       subject: String,
       html: String,
+
+      created: [Date, String],
+      modified: [Date, String],
+
+      author: [Object, {
+        username: String,
+      }],
+
       topics: [Array, {
         name: String,
         url: String,
-      } ],
+      }],
+    },
+
+    computed: {
+      createdDate: () => {
+        const now = moment()
+        const created = moment(this.created)
+
+        if (now.format(moment.HTML5_FMT.DATE) === created.format(moment.HTML5_FMT.DATE)) {
+          return
+        }
+
+        if (now.format(moment.HTML5_FMT.WEEK) === created.format(moment.HTML5_FMT.WEEK)) {
+          return created.format('dddd')
+        }
+
+        return created.format(moment.HTML5_FMT.DATE)
+      },
+
+      createdTime: () => {
+        return moment(this.created).format(moment.HTML5_FMT.TIME)
+      },
     },
   }
 </script>
 
-<style scoped>
-  footer {
-    text-align: right;
-    padding-right: 3em;
-    font-size: 0.9rem;
+<style lang="scss" scoped>
+  article {
+    min-width: 32rem;
+
+    > header {
+      display: flex;
+      align-items: baseline;
+
+      padding: 0 0.2rem;
+      background: #E9E9E9AA;
+      color: #303030;
+
+      a:link, a:active, a:visited, a:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      > h2, > h4 {
+        margin-bottom: 0;
+      }
+
+      > h2 {
+        flex-grow: 1;
+      }
+    }
+
+    > div {
+      font-size: 1.2rem;
+    }
+
+    > footer {
+      text-align: right;
+      padding-right: 3em;
+      font-size: 0.9rem;
+    }
   }
 </styled>

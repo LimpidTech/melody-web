@@ -52,6 +52,10 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  max-width: 68rem;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

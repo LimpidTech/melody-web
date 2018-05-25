@@ -5,6 +5,9 @@
       :subject="post.subject"
       :html="post.html"
       :topics="post.topics"
+      :author="post.author"
+      :created="post.created"
+      :modified="post.last_modified"
     />
   </section>
 </template>
