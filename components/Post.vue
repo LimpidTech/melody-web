@@ -46,7 +46,7 @@
     },
 
     computed: {
-      createdDate: () => {
+      createdDate: function () {
         const now = moment()
         const created = moment(this.created)
 
@@ -61,8 +61,9 @@
         return created.format(moment.HTML5_FMT.DATE)
       },
 
-      createdTime: () => {
-        return moment(this.created).format(moment.HTML5_FMT.TIME)
+      createdTime: function () {
+        const created = moment(this.created)
+        return created.format('LTS')
       },
     },
   }
