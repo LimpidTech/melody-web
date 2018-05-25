@@ -63,7 +63,7 @@
 
       createdTime: function () {
         const created = moment(this.created)
-        return created.format('LTS')
+        return created.format('LT')
       },
     },
   }
