@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@nuxtjs/sentry": "^1.0.3",
+    "cookieparser": "^0.1.0",
     "moment": "^2.22.1",
     "nuxt": "^1.0.0"
   },

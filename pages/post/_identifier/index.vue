@@ -12,18 +12,10 @@ import Post from '~/components/Post'
 
 import { Metanic } from '~/clients/metanic'
 
-import cookies from '~/helpers/cookies'
-
 export default {
   asyncData({ req, params }) {
-    const { sessionid } = cookies(req.headers.cookie)
-
     const metanic = new Metanic(req)
     const options = {}
-
-    if (sessionid) {
-      options.headers = { Cookie: `sessionid=${sessionid};` }
-    }
 
     return metanic.get('post', params.identifier, options)
       .then(post => ({ post }))

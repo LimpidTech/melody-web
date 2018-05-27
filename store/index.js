@@ -1,3 +1,5 @@
+import cookie from 'js-cookie'
+
 import { Metanic } from '~/clients/metanic'
 
 const metanic = new Metanic()
@@ -11,7 +13,7 @@ export const getters = {
 export const mutations = {
   setAuthenticationToken: (state, token) => {
     if (!process.browser) return
-    localStorage.setItem('authentication:token', token)
+    cookie.set('authentication:token', token)
     state.authenticationToken = token
   },
 }
@@ -19,7 +21,7 @@ export const mutations = {
 export const actions = {
   nuxtServerInit: context => {},
   authenticate: ({ commit }, data) => {
-    metanic.post('jwt', {body: data})
+    metanic.post('jwt', 'obtain', {body: data})
       .then(({ data }) => {
         commit('setAuthenticationToken', data.token)
       })

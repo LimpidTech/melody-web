@@ -3,8 +3,9 @@
 </template>
 
 <script>
+import Cookies from '~/helpers/cookies'
+
 import Home from '~/components/Home'
-import cookies from '~/helpers/cookies'
 
 import { Metanic } from '~/clients/metanic'
 
@@ -18,16 +19,20 @@ function getWrappedData(context, {data, metadata}) {
 
 export default {
   asyncData(context) {
-    const options = {}
-    const metanic = new Metanic(context.req)
+    const cookies = new Cookies(context.req.headers.cookie)
 
-    if (context.req.headers.cookie) {
-      const { sessionid } = cookies(context.req.headers.cookie)
+    const token = cookies.get('authentication:token')
+    const metanic = new Metanic()
 
-      if (sessionid) {
-        options.headers = { Cookie: `sessionid=${sessionid};` }
-      }
+    const options = {
+      headers: new Headers(),
     }
+
+    if (token) {
+      options.headers.append('Authorization', `JWT ${token}`)
+    }
+
+    metanic.post('jwt', 'verify', options).then(console.log)
 
     return metanic.get('collection', 'recent_posts', options)
       .then(result => getWrappedData(context, result))
