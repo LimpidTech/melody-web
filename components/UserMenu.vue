@@ -1,14 +1,7 @@
 <template>
   <nav>
-    <li><h3></h3></li>
   </nav>
 </template>
-
-<script>
-export default {
-  computed: {},
-}
-</script>
 
 <style scoped>
   margin: 0.2em auto 1ex;
