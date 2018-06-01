@@ -19,7 +19,7 @@ export const mutations = {
 export const actions = {
   nuxtServerInit: context => {},
   authenticate: ({ commit }, data) => {
-    metanic.post('jwt', {body: data})
+    metanic.post('jwt', 'obtain', {body: data})
       .then(({ data }) => {
         commit('setAuthenticationToken', data.token)
       })
