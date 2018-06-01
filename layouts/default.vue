@@ -52,10 +52,6 @@ html {
   box-sizing: border-box;
 }
 
-body {
-  max-width: 68rem;
-}
-
 h4, h5, h6 {
   font-weight: normal;
   font-style: normal;
@@ -66,17 +62,7 @@ h4, h5, h6 {
   margin: 0;
 }
 
-* + * {
-  margin-bottom: 1.3rem;
-}
-
-li + *,
-a + *,
-nav + * {
-  margin-bottom: 0;
-}
-
-section {
+#__layout > section {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -147,7 +133,7 @@ section {
     }
 
     > main {
-      max-width: 960px;
+      max-width: 68rem;
       margin: 0 auto;
     }
 
