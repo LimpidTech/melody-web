@@ -18,6 +18,8 @@ function objectToCookieString(object) {
 }
 
 export default function parse(cookies, subject, setValue) {
+  cookies = cookies || ''
+
   const result = {}
 
   let current = {key: '', value: ''}
