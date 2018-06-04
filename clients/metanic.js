@@ -17,20 +17,19 @@ export class Metanic {
   }
 
   optionData(...parts) {
+    const headers = new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    })
+
     const options = Object.assign({
       method: 'POST',
       credentials: 'include',
-      headers: [
-        ['Accept', 'application/json'],
-        ['Content-Type', 'application/json'],
-      ],
+      headers,
     }, ...parts)
 
     if (this.authenticationToken) {
-      options.headers.push([
-        'Authorization',
-        'JWT ' + this.authenticationToken,
-      ])
+      headers.append('Authorization', 'JWT ' + this.authenticationToken)
     }
 
     if (!options.body) return options
