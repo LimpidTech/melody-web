@@ -5,34 +5,10 @@ import fetch from 'isomorphic-fetch'
 export class RequestError extends Error {}
 export class ServerError extends Error {}
 
-function withAuthentication(headers) {
-  if (process.env.VUE_ENV === 'server') return headers
-
-  const jwt = localStorage.getItem('authentication:token')
-  if (!jwt) return headers
-
-  const cookie = ['Authorization', '']
-  const result = []
-
-  headers = headers || []
-
-  for (const headerInfo of headers) {
-    if (headerInfo[0].toLowerCase() !== 'authentication') {
-      result.push(headerInfo)
-    } else {
-      cookie[1] = headerInfo[1]
-    }
-  }
-
-  if (jwt && !cookie[1]) cookie[1] = 'Bearer ' + jwt
-
-  result.push(cookie)
-  return result
-}
-
 export class Metanic {
-  constructor(request) {
+  constructor(token) {
     this.root = process.env.METANIC_SERVICES_URL
+    this.authenticationToken = token || null
   }
 
   url(...parts) {
@@ -49,6 +25,13 @@ export class Metanic {
         ['Content-Type', 'application/json'],
       ],
     }, ...parts)
+
+    if (this.authenticationToken) {
+      options.headers.push([
+        'Authorization',
+        'JWT ' + this.authenticationToken,
+      ])
+    }
 
     if (!options.body) return options
     if (typeof options.body === 'string') return options
@@ -77,8 +60,6 @@ export class Metanic {
 
   request(...parts) {
     const { url, options } = this.extractRequestComponents(...parts)
-
-    options.headers = withAuthentication(options.headers)
 
     return new Promise((resolve, reject) =>
       fetch(url, options)

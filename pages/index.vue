@@ -18,16 +18,12 @@ function getWrappedData(context, {data, metadata}) {
 
 export default {
   asyncData(context) {
+    if (process.browser) return
+
+    const cookieData = cookies(context.req.headers.cookie)
     const options = {}
-    const metanic = new Metanic(context.req)
 
-    if (context.req.headers.cookie) {
-      const { sessionid } = cookies(context.req.headers.cookie)
-
-      if (sessionid) {
-        options.headers = { Cookie: `sessionid=${sessionid};` }
-      }
-    }
+    const metanic = new Metanic(cookieData['authentication:token'])
 
     return metanic.get('collection', 'recent_posts', options)
       .then(result => getWrappedData(context, result))
