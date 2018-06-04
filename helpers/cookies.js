@@ -45,14 +45,10 @@ export default function parse(cookies, subject, setValue) {
     result[current.key] = current.value
   }
 
-  if (typeof subject === 'undefined') {
-    return result
-  }
-
-  if (typeof setValue === 'undefined') {
-    return result[subject]
-  }
+  if (typeof subject === 'undefined') { return result }
+  if (typeof setValue === 'undefined') { return result[subject] }
 
   result[subject] = setValue
+
   return objectToCookieString(result)
 }
