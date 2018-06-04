@@ -14,7 +14,6 @@ export const mutations = {
   setAuthenticationToken: (state, token) => {
     if (!process.browser) return
     document.cookie = cookies(document.cookie, 'authentication:token', token)
-    console.log(document.cookie)
     state.authenticationToken = token
   },
 }
