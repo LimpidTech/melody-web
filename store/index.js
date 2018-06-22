@@ -1,4 +1,7 @@
+import moment from 'moment'
+
 import { Metanic } from '~/clients/metanic'
+import cookies from '~/helpers/cookies'
 
 import cookies from '~/helpers/cookies'
 
@@ -13,7 +16,8 @@ export const getters = {
 export const mutations = {
   setAuthenticationToken: (state, token) => {
     if (!process.browser) return
-    document.cookie = cookies(document.cookie, 'authentication:token', token)
+    const expiry = moment().add(14, 'days')
+    document.cookie = cookies(document.cookie, 'authentication:token', token, expiry.toDate(), '/')
     state.authenticationToken = token
   },
 }

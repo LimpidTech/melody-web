@@ -7,15 +7,12 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "env-cmd --no-override .env.development nuxt",
-    "generate": "env-cmd --no-override .env nuxt generate",
+    "generate": "env-cmd --no-override .env.development nuxt generate",
     "heroku-postbuild": "npm run build",
-    "lint": "env-cmd --no-override .env eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "env-cmd --no-override .env.development eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "start": "nuxt start",
     "test": "true"
-  },
-  "engines": {
-    "node": "^=8.4.0"
   },
   "dependencies": {
     "@nuxtjs/sentry": "^1.0.3",
