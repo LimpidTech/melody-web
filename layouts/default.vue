@@ -92,6 +92,12 @@ h4, h5, h6 {
     flex-grow: 1;
     padding: 0.4em;
     margin-bottom: 0;
+    padding-top: 1rem;
+
+    > section {
+      margin: 0 auto;
+      max-width: 90%;
+    }
   }
 
   > footer {
