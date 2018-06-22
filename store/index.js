@@ -3,8 +3,6 @@ import moment from 'moment'
 import { Metanic } from '~/clients/metanic'
 import cookies from '~/helpers/cookies'
 
-import cookies from '~/helpers/cookies'
-
 const metanic = new Metanic()
 
 export const state = () => ({})

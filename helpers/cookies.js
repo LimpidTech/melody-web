@@ -1,26 +1,15 @@
-const COOKIE_EXPIRATION_DAYS = 45
-
-function getExpirationTime() {
-  const date = new Date()
-  const deltaTime = COOKIE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000
-  date.setTime(date.getTime() + deltaTime)
-  return date
-}
-
 function objectToCookieString(object) {
   let result = ''
   for (const key of Object.keys(object)) {
     const value = object[key]
     if (typeof value === 'undefined') { continue }
-    result += key + '=' + (value || '') + '; expires=' + getExpirationTime() + '; path=/'
+    result += `${key}=${value};`
   }
   return result
 }
 
-export default function parse(cookies, subject, setValue) {
-  cookies = cookies || ''
-
-  const result = {}
+export function cookieStringToObject(cookies) {
+  const state = {}
 
   let current = {key: '', value: ''}
   let key = true
@@ -101,15 +90,6 @@ export default function cookie(cookies, cookie, value, expiry, path) {
   if (typeof state[cookie] === 'undefined') {
     return result
   }
-
-  if (current.key) {
-    result[current.key] = current.value
-  }
-
-  if (typeof subject === 'undefined') { return result }
-  if (typeof setValue === 'undefined') { return result[subject] }
-
-  result[subject] = setValue
 
   return objectToCookieString(result)
 }
