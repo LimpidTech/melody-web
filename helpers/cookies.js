@@ -53,7 +53,7 @@ export function cookieStringToObject(cookies) {
 }
 
 export default function cookie(cookies, cookie, value, expiry, path) {
-  console.log(cookies)
+  cookies = cookies || ''
 
   // Ensure that values are trimmed as one would expect
   cookies = cookies.trim()
