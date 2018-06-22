@@ -53,11 +53,13 @@ export function cookieStringToObject(cookies) {
 }
 
 export default function cookie(cookies, cookie, value, expiry, path) {
-  if (typeof cookies !== 'string') { return objectToCookieString(cookies) }
+  console.log(cookies)
 
   // Ensure that values are trimmed as one would expect
   cookies = cookies.trim()
-  cookie = cookie.trim()
+
+  // Trim the specific cookie name if it is set
+  if (cookie) cookie = cookie.trim()
 
   const state = cookieStringToObject(cookies)
 
