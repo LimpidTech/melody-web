@@ -46,7 +46,7 @@ export function cookieStringToObject(cookies) {
   current.value = current.value.trim()
 
   if (current.key) {
-    state[current.key] = decodeURIComponent(current.value)
+    state[decodeURIComponent(current.key)] = decodeURIComponent(current.value)
   }
 
   return state

@@ -79,10 +79,16 @@ export class Metanic {
 }
 
 function verify(response) {
-  if (response.status > 399 && response.status < 500) {
+  if (response.status === 400) {
     throw new RequestError(
       'Unexpected or malformed data was sent to ' + response.url
     )
+  }
+
+  switch (response.status) {
+    case 401:
+      // TODO: Request new authentication
+      break
   }
 
   if (response.status > 299 || response.status < 200) {
