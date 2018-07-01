@@ -1,7 +1,14 @@
 <template>
   <nav>
-    <nuxt-link v-if="user.isAuthenticated" to="/account/">{{ user.username }}</nuxt-link>
-    <nuxt-link v-if="!user.isAuthenticated" to="/login/">Login</nuxt-link>
+    <div v-if="!user.isAuthenticated">
+      <a href="/account/login/">Login</a>
+      <a href="/account/register/">Register</a>
+    </div>
+
+    <a v-else href="/account/">
+      <span v-if="!user.avatar">{{ user.username }}</span>
+      <img v-if="user.avatar" v-src="user.avatar"></span>
+    </a>
   </nav>
 </template>
 
@@ -11,15 +18,23 @@ export default {
 }
 </script>
 
-<style scoped>
-  margin: 0.2em auto 1ex;
-  width: 3em;
-  height: 3em;
+<style scoped lang="scss">
+  nav {
+    a {
+      color: #393939;
+      text-decoration: none;
+    }
 
-  background-color: #29A3EC;
-  border-radius: 100%;
+    @media (min-width: 780px) {
+      display: inline-block;
 
-  @media (min-width: 780px) {
-    display: inline-block;
+      a {
+        vertical-align: bottom;
+      }
+
+      a ~ a {
+        padding: 0 0 0 1.5em;
+      }
+    }
   }
 </style>

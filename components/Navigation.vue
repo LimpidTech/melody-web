@@ -23,8 +23,7 @@ nav {
   display: flex;
   flex-direction: column;
 
-  > a, input {
-    display: block;
+  > a {
     color: #393939;
     text-decoration: none;
   }
@@ -36,7 +35,6 @@ nav {
     > a, input {
       display: inline-block;
       margin: 0 1.5em 0.2em;
-      font-size: 0.9em;
       vertical-align: bottom;
     }
   }
