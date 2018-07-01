@@ -82,9 +82,7 @@ export class Metanic {
 
     return response => {
       // Ensure that authenticated responses are not cached
-      if (response.metadata.user.isAuthenticated) {
-        res.setHeader('Cache-Control', 'No-Cache')
-      }
+      res.setHeader('Cache-Control', 'No-Cache')
 
       // Update the user in the store
       store.commit('updateUser', response.metadata.user)
