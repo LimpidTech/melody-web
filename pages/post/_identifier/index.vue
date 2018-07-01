@@ -13,8 +13,9 @@ import Post from '~/components/Post'
 import { Metanic } from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
+import page from '~/helpers/pages'
 
-export default {
+export default page({
   asyncData({ req, params }) {
     const { sessionid } = cookies(req.headers.cookie)
 
@@ -35,5 +36,5 @@ export default {
   components: {
     Post,
   },
-}
+})
 </script>

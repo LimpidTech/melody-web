@@ -6,10 +6,9 @@
 
 <script>
 import Authenticator from '~/components/Authenticator'
+import page from '~/helpers/pages'
 
-export default {
-  components: {
-    Authenticator,
-  },
-}
+export default page({
+  components: {Authenticator},
+})
 </script>

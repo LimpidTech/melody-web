@@ -1,7 +1,6 @@
 <template>
   <section>
     <header>
-      <UserMenu />
       <Navigation />
       <h2>Metanic</h2>
     </header>

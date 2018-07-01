@@ -76,6 +76,24 @@ export class Metanic {
   options(...options) { return this.request(...options, {method: 'OPTIONS'}) }
   post(...options) { return this.request(...options, {method: 'POST'}) }
   put(...options) { return this.request(...options, {method: 'PUT'}) }
+
+  applyMeta(context) {
+    /** Store metadata on the context.
+     *
+     * NOTE: This seems hella hax. TODO: Fix! :D
+     **/
+
+    return response => {
+      // TODO: Maybe use _.get for this <3
+      if (response.metadata && response.metadata.user) {
+        context.req.user = response.metadata.user
+      } else {
+        context.req.user = null
+      }
+
+      return response
+    }
+  }
 }
 
 function verify(response) {
@@ -104,6 +122,7 @@ function extractHeaders(response) {
   return {
     response,
 
+    // So, apparently CORS is annoying and headers won't come back
     metadata: {
       user: {
         isAuthenticated: response.headers.get('x-metanic-isauthenticated') === 'True',
