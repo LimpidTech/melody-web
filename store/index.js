@@ -30,9 +30,11 @@ export const mutations = {
     // Ensure that we don't store tokens / user data on the server
     if (!process.browser) return
 
+    // Delete cookie so that it doesn't become a list
+    document.cookie = cookies(document.cookie, 'authentication:token', '', cookies.DELETE, '/')
+
     // TODO: Use expiry header information from when token was obtained to detect
     //       the expiration timeout.
-
     const expiry = moment().add(14, 'days')
     document.cookie = cookies(document.cookie, 'authentication:token', token, expiry.toDate(), '/')
   },

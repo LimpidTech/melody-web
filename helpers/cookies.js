@@ -1,4 +1,7 @@
-function objectToCookieString(object) {
+export const DELETE = 'Thu, 16 Oct 1986 19:45:17 GMT'
+export const SESSION = 0
+
+export function objectToCookieString(object) {
   let result = ''
   for (const key of Object.keys(object)) {
     const value = object[key]
@@ -52,7 +55,7 @@ export function cookieStringToObject(cookies) {
   return state
 }
 
-export default function cookie(cookies, cookie, value, expiry, path) {
+export default function cookies(cookies, cookie, value, expiry, path) {
   cookies = cookies || ''
 
   // Ensure that values are trimmed as one would expect
@@ -78,7 +81,7 @@ export default function cookie(cookies, cookie, value, expiry, path) {
 
   // If an expiry was given, add one.
   if (expiryType !== 'undefined') {
-    if (expiryType !== 'string') { expiry = expiry.toGMTString() }
+    if (expiryType !== 'string' && expiryType !== 'number') { expiry = expiry.toGMTString() }
     value += `;expires=${expiry}`
   }
 
@@ -89,9 +92,11 @@ export default function cookie(cookies, cookie, value, expiry, path) {
   const result = `${encodeURIComponent(cookie)}=${value}`
 
   // If the key hasn't been discovered yet, add it to our finals state.
-  if (typeof state[cookie] === 'undefined') {
-    return result
-  }
-
-  return objectToCookieString(result)
+  return result
 }
+
+// Pass cookies.DELETE as the expiration date to delete cookies
+cookies.DELETE = DELETE
+
+// Pass cookies.SESSION as the expiration date to delete cookies after the current session
+cookies.SESSION = SESSION

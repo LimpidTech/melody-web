@@ -77,11 +77,18 @@ export class Metanic {
   post(...options) { return this.request(...options, {method: 'POST'}) }
   put(...options) { return this.request(...options, {method: 'PUT'}) }
 
-  applyMeta({ store }) {
+  applyMeta({ store, res }) {
     // Apply latest Metanic metadata from request headers into the store
 
     return response => {
+      // Ensure that authenticated responses are not cached
+      if (response.metadata.user.isAuthenticated) {
+        res.setHeader('Cache-Control', 'No-Cache')
+      }
+
+      // Update the user in the store
       store.commit('updateUser', response.metadata.user)
+
       return response
     }
   }
