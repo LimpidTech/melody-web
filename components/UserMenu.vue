@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <nav>
     <nuxt-link v-if="user.isAuthenticated" to="/account/">{{ user.username }}</nuxt-link>
     <nuxt-link v-if="!user.isAuthenticated" to="/login/">Login</nuxt-link>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -21,7 +21,5 @@ export default {
 
   @media (min-width: 780px) {
     display: inline-block;
-    width: 1.3em;
-    height: 1.3em;
   }
 </style>

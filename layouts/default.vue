@@ -76,17 +76,6 @@ h4, h5, h6 {
     margin-top: 0;
   }
 
-  > header > nav > a {
-    display: block;
-    color: #393939;
-    text-decoration: none;
-  }
-
-  > header > nav > input {
-    display: block;
-    margin-top: 3em;
-  }
-
   > main {
     flex-grow: 1;
     padding: 0.4em;
@@ -116,25 +105,6 @@ h4, h5, h6 {
 
     > header > h2 {
       display: inline-block;
-    }
-
-    > header > nav {
-      float: right;
-      display: inline-block;
-      margin-top: 0;
-    }
-
-    > header > nav > a {
-      display: inline-block;
-      padding-right: 3em;
-      padding-bottom: 0.2em;
-      font-size: 0.9em;
-      vertical-align: bottom;
-    }
-
-    > header > nav > input {
-      display: inline-block;
-      margin-top: 0;
     }
 
     > main {

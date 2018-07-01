@@ -2,7 +2,7 @@
   <nav>
     <a href='/'>Home</a>
     <UserMenu />
-    <search />
+    <Search />
   </nav>
 </template>
 
@@ -17,3 +17,28 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="scss">
+nav {
+  display: flex;
+  flex-direction: column;
+
+  > a, input {
+    display: block;
+    color: #393939;
+    text-decoration: none;
+  }
+
+  @media (min-width: 780px) {
+    float: right;
+    flex-direction: row;
+
+    > a, input {
+      display: inline-block;
+      margin: 0 1.5em 0.2em;
+      font-size: 0.9em;
+      vertical-align: bottom;
+    }
+  }
+}
+</style>
