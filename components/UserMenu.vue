@@ -7,17 +7,7 @@
 
 <script>
 export default {
-  data({ $store }) {
-    const result = {}
-
-    if (process.server) {
-      result.user = $store.app.context.req.user || {}
-    } else {
-      result.user = $store.state.user || {}
-    }
-
-    return result
-  },
+  data({ $store }) { return { user: $store.state.user || {} } },
 }
 </script>
 
