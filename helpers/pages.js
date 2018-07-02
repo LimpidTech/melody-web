@@ -18,7 +18,7 @@ function getInitalPageData(asyncData, context) {
     .catch(err => { throw err })
 }
 
-export default page => {
+export default function createPage(page) {
   page.asyncData = getInitalPageData.bind(this, page.asyncData)
   return page
 }

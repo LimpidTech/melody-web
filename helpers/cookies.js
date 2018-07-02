@@ -1,6 +1,16 @@
 export const DELETE = 'Thu, 16 Oct 1986 19:45:17 GMT'
 export const SESSION = 0
 
+// Set this to false to enable debug mode. This will
+// disables the secure flag on cookies when set to false.
+
+// NOTE: If secure is passed as `false` to the cookie
+// function, this will be ignored.
+export let SECURE = true
+
+// Set this to false if you don't want httpOnly on cookies.
+export let HTTP_ONLY = true
+
 export function objectToCookieString(object) {
   let result = ''
   for (const key of Object.keys(object)) {
@@ -55,7 +65,7 @@ export function cookieStringToObject(cookies) {
   return state
 }
 
-export default function cookies(cookies, cookie, value, expiry, path) {
+export default function cookies(cookies, cookie, value, expiry, path, httpOnly, secure) {
   cookies = cookies || ''
 
   // Ensure that values are trimmed as one would expect
@@ -87,7 +97,13 @@ export default function cookies(cookies, cookie, value, expiry, path) {
 
   // If a path wasn't given, assume root.
   if (typeof path === 'undefined') { path = '/' }
-  value += `;path=${path}`
+  value += `;path=${path};`
+
+  if (HTTP_ONLY) { value += 'httpOnly;' }
+
+  if (SECURE && (typeof secure === 'undefined' || secure)) {
+    value += 'secure;'
+  }
 
   const result = `${encodeURIComponent(cookie)}=${value}`
 
