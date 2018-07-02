@@ -8,8 +8,11 @@ export const SESSION = 0
 // function, this will be ignored.
 export let SECURE = true
 
-// Set this to false if you don't want httpOnly on cookies.
-export let HTTP_ONLY = true
+// Set this to true if you want httpOnly set on cookies.
+export let HTTP_ONLY = false
+
+// Set this to change the default cookie path.
+export let DEFAULT_PATH = '/'
 
 export function objectToCookieString(object) {
   let result = ''
@@ -92,23 +95,21 @@ export default function cookies(cookies, cookie, value, expiry, path, httpOnly, 
   // If an expiry was given, add one.
   if (expiryType !== 'undefined') {
     if (expiryType !== 'string' && expiryType !== 'number') { expiry = expiry.toGMTString() }
-    value += `;expires=${expiry}`
+    value += `; expires=${expiry}`
   }
 
-  // If a path wasn't given, assume root.
-  if (typeof path === 'undefined') { path = '/' }
-  value += `;path=${path};`
+  // If a path wasn't given, assume DEFAULT_PATH.
+  if (typeof path === 'undefined') { path = DEFAULT_PATH }
+  value += `; path=${path}`
 
-  if (HTTP_ONLY) { value += 'httpOnly;' }
+  if (HTTP_ONLY || httpOnly) { value += '; HttpOnly' }
 
   if (SECURE && (typeof secure === 'undefined' || secure)) {
-    value += 'secure;'
+    value += '; secure'
   }
 
-  const result = `${encodeURIComponent(cookie)}=${value}`
-
   // If the key hasn't been discovered yet, add it to our finals state.
-  return result
+  return `${encodeURIComponent(cookie)}=${value}`
 }
 
 // Pass cookies.DELETE as the expiration date to delete cookies
