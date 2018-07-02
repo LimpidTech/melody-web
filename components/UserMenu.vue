@@ -7,7 +7,7 @@
 
     <a v-else href="/account/">
       <span v-if="!user.avatar">{{ user.username }}</span>
-      <img v-if="user.avatar" v-src="user.avatar"></span>
+      <img v-if="user.avatar" v-src="user.avatar" />
     </a>
   </nav>
 </template>
