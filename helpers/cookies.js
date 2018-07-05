@@ -6,7 +6,10 @@ export const SESSION = 0
 
 // NOTE: If secure is passed as `false` to the cookie
 // function, this will be ignored.
-export let SECURE = true
+
+// TODO: Don't use process.env.NODE_ENV so that this file
+// can be ported to a separate library.
+export let SECURE = process.env.NODE_ENV !== 'development'
 
 // Set this to true if you want httpOnly set on cookies.
 export let HTTP_ONLY = false
