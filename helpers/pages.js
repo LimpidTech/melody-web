@@ -1,15 +1,21 @@
-import cookies from '~/helpers/cookies'
-
 import { Metanic } from '~/clients/metanic'
 
-function getInitalPageData(asyncData, context) {
-  // Use cookies to pull authentication information during
-  // server-side rendering, so that we can render the user's
-  // proper page content without client-side XHR.
-  const cookieData = cookies(context.req.headers.cookie)
-  const options = {}
+import cookies from '~/helpers/cookies'
 
-  const metanic = new Metanic(cookieData['authentication:token'])
+function initializeAuthorization({ req, store }) {
+  const cookieData = cookies(req.headers.cookie)
+  const token = cookieData['authentication:token']
+  if (!token) { return }
+  store.commit('updateAuthenticationToken', token)
+}
+
+function getInitalPageData(asyncData, context) {
+  /** Ensure cookies are in state. **/
+
+  initializeAuthorization(context)
+
+  const options = {}
+  const metanic = Metanic.FromStore(context.store)
 
   // TODO: Wrap asyncData into this.
   return metanic.get('collection', 'recent_posts', options)

@@ -80,7 +80,8 @@ h4, h5, h6 {
     flex-grow: 1;
     padding: 0.4em;
     margin-bottom: 0;
-    padding-top: 1rem;
+    padding-top: 1em;
+    font-size: 1.2em;
 
     > section {
       margin: 0 auto;
@@ -90,7 +91,7 @@ h4, h5, h6 {
 
   > footer {
     display: none;
-    font-size: 1rem;
+    font-size: 1em;
     text-align: center;
     user-select: none;
   }
@@ -109,13 +110,11 @@ h4, h5, h6 {
 
     > main {
       max-width: 68rem;
-      margin: 0 auto;
     }
 
     > footer {
       display: block;
-      margin-top: 6rem;
-      min-height: 3rem;
+      padding: 1em;
     }
   }
 }

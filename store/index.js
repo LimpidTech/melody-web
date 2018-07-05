@@ -6,6 +6,7 @@ import cookies from '~/helpers/cookies'
 const metanic = new Metanic()
 
 export const state = () => ({
+  authentication: {},
   user: {
     identifier: null,
     isAuthenticated: false,
@@ -26,29 +27,34 @@ export const mutations = {
     })
   },
 
-  setAuthenticationToken: (state, {token, user}) => {
-    // Ensure that we don't store tokens / user data on the server
-    if (!process.browser) return
+  updateAuthenticationToken: (state, token) => {
+    state.authentication.token = token
 
-    // Delete cookie so that it doesn't become a list
-    document.cookie = cookies(document.cookie, 'authentication:token', '', cookies.DELETE, '/')
+    if (process.browser) {
+      // Delete cookie so that it doesn't become a list
+      document.cookie = cookies(document.cookie, 'authentication:token', '', cookies.DELETE, '/')
 
-    // TODO: Use expiry header information from when token was obtained to detect
-    //       the expiration timeout.
-    const expiry = moment().add(14, 'days')
-    document.cookie = cookies(document.cookie, 'authentication:token', token, expiry.toDate(), '/')
+      // TODO: Use expiry header information from when token was obtained to detect
+      //       the expiration timeout.
+      const expiry = moment().add(14, 'days')
+      document.cookie = cookies(document.cookie, 'authentication:token', token, expiry.toDate(), '/')
+    }
   },
 }
 
 export const actions = {
   nuxtServerInit: context => {},
+
+  // Functions for working with data in services
+  createPost: (store, body) => (new Metanic.FromStore(store)).post('post', {body}),
+
+  // Utility functions for authentication & authorization
   authenticate: ({ commit }, data) => {
     metanic.post('jwt', 'obtain', {body: data})
       .then(({ data, metadata }) => {
-        commit('setAuthenticationToken', {
-          token: data.token,
-          user: metadata.user,
-        })
+        commit('updateAuthenticationToken', data.token)
+        commit('updateUser', metadata.user)
       })
   },
+
 }

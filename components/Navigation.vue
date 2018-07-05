@@ -3,6 +3,7 @@
     <a href='/'>Home</a>
     <UserMenu />
     <Search />
+    <a href='/post/'> + </a>
   </nav>
 </template>
 

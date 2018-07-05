@@ -6,7 +6,10 @@
       </h2>
 
       <h4>
-        Published by {{ author.username }} <FriendlyDate :date=created />
+        Published
+        <span v-if=author>by {{ author.username }}</span>
+        <span v-else>anonymously</span>
+        <FriendlyDate :date=created />
       </h4>
     </header>
 

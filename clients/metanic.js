@@ -1,18 +1,23 @@
 import Promise from 'bluebird'
-
 import fetch from 'isomorphic-fetch'
 
 export class RequestError extends Error {}
 export class ServerError extends Error {}
 
 export class Metanic {
+  static FromStore(store) {
+    // Use the store to pull authentication information during
+    // server-side rendering, so that we can render the user's
+    // proper page content without client-side XHR.
+    return new Metanic(store.state.authentication.token)
+  }
+
   constructor(token) {
     this.root = process.env.METANIC_SERVICES_URL
     this.authenticationToken = token || null
   }
 
   url(...parts) {
-    if (parts.length === 0) return this.root
     return this.root + parts.join('/') + '/'
   }
 
@@ -81,12 +86,8 @@ export class Metanic {
     // Apply latest Metanic metadata from request headers into the store
 
     return response => {
-      // Ensure that authenticated responses are not cached
       res.setHeader('Cache-Control', 'No-Cache')
-
-      // Update the user in the store
       store.commit('updateUser', response.metadata.user)
-
       return response
     }
   }
