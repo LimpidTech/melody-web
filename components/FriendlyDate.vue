@@ -1,11 +1,7 @@
 <template>
   <span>
-    <FriendlyTime
-      :time=date
-      :prefix=timePrefix
-    />
-
-    <span v-if=friendlyDate>on {{ friendlyDate }}</span>
+    <FriendlyTime :time=date :prefix=timePrefix />
+    <span v-if=friendlyDate> on {{ friendlyDate }} </span>
   </span>
 </template>
 
@@ -16,9 +12,7 @@
   import FriendlyTime from '~/components/FriendlyTime'
 
   export default {
-    components: {
-      FriendlyTime,
-    },
+    components: { FriendlyTime },
 
     props: {
       date: [Date, String],

@@ -1,5 +1,5 @@
 <template>
-  <span v-if=friendlyTime>{{ friendlyTime }}</span>
+  <span v-if=friendlyTime> {{ friendlyTime }} </span>
 </template>
 
 <script>

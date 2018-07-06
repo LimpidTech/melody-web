@@ -60,7 +60,7 @@
       display: flex;
       align-items: baseline;
 
-      padding: 0 0.2rem;
+      padding: 0 0.4em;
       background: #E9E9E9AA;
       color: #303030;
 
