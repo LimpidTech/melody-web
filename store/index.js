@@ -46,10 +46,13 @@ export const actions = {
   nuxtServerInit: context => {},
 
   // Functions for working with data in services
-  createPost: (store, body) => (new Metanic.FromStore(store)).post('post', {body}),
+  createPost(store, body) {
+    const metanic = new Metanic.FromStore(store)
+    return metanic.post('post', { body })
+  },
 
   // Utility functions for authentication & authorization
-  authenticate: ({ commit }, data) => {
+  authenticate({ commit }, data) {
     metanic.post('jwt', 'obtain', {body: data})
       .then(({ data, metadata }) => {
         commit('updateAuthenticationToken', data.token)

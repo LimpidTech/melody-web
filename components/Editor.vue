@@ -28,12 +28,18 @@
       />
     </label>
 
-    <input type='submit' name='submit' value='Create' />
+    <button type='submit'>{{ submitText() }}</button>
   </form>
 </template>
 
 <script>
 export default {
+  props: {
+    url: String,
+    created: Function,
+    failure: Function,
+  },
+
   data() {
     return {
       subject: '',
@@ -50,11 +56,22 @@ export default {
       // NOTE: The store may be a better place for this, since it is sync'd
       //       to the client.
 
-      this.$store.dispatch('createPost', {
-        subject: this.subject,
-        body: this.body,
-        topics: this.topics,
-      })
+      try {
+        const { data } = await this.$store.dispatch('createPost', {
+          subject: this.subject,
+          body: this.body,
+          topics: this.topics,
+        })
+
+        this.created(data)
+      } catch (exception) {
+        this.failure(exception)
+      }
+    },
+
+    submitText() {
+      if (this.url) { return 'Update' }
+      return 'Create'
     },
   },
 }
@@ -70,7 +87,8 @@ export default {
     max-width: 42em;
   }
 
-  input, textarea {
+  input, textarea, button {
+    margin-bottom: 1em;
     padding: 0.2em;
     width: 100%;
     height: 1.8em;
@@ -85,9 +103,5 @@ export default {
 
   h2 {
     margin-bottom: 0.6em;
-  }
-
-  input, textarea {
-    margin-bottom: 1em;
   }
 </style>
