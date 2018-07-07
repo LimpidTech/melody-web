@@ -26,7 +26,7 @@ export default {
     display: flex;
     flex-direction: column;
     float: right;
-    padding-right: 3em;
+    padding-right: 0.3em;
 
     > nav > a {
       display: block;
