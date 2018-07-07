@@ -9,9 +9,8 @@
     </main>
 
     <footer>
-      <a href="https://www.patreon.com/bePatron?u=11225766"
-         data-patreon-widget-type="become-patron-button">
-         Become a Patron!
+      <a href="https://www.patreon.com/metanic">
+         Powered by Metanic
       </a>
     </footer>
   </section>
@@ -90,7 +89,7 @@ h4, h5, h6 {
 
   > footer {
     display: none;
-    font-size: 1em;
+    font-size: 0.8em;
     text-align: center;
     user-select: none;
   }
