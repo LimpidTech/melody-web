@@ -1,14 +1,10 @@
 <template>
   <nav>
-    <div v-if="!user.isAuthenticated">
-      <a href="/account/login/">Login</a>
-      <a href="/account/register/">Register</a>
-    </div>
+    <a v-if="!user.isAuthenticated" href="/account/login/">Login</a>
+    <a v-if="!user.isAuthenticated" href="/account/register/">Register</a>
 
-    <a v-else href="/account/">
-      <span v-if="!user.avatar">{{ user.username }}</span>
-      <img v-if="user.avatar" v-src="user.avatar" />
-    </a>
+    <span v-if="user.isAuthenticated && !user.avatar">{{ user.username }}</span>
+    <img v-if="user.isAuthenticated && user.avatar" v-src="user.avatar" />
   </nav>
 </template>
 
@@ -19,8 +15,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  nav {
-    a {
+  * {
+    > a {
       color: #393939;
       text-decoration: none;
     }
@@ -28,7 +24,7 @@ export default {
     @media (min-width: 780px) {
       display: inline-block;
 
-      a {
+      > a {
         vertical-align: bottom;
       }
 

@@ -78,30 +78,34 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  form {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-    max-width: 42em;
-  }
+  * {
+    > form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+      max-width: 42em;
 
-  input, textarea, button {
-    margin-bottom: 1em;
-    padding: 0.2em;
-    width: 100%;
-    height: 1.8em;
-    font-size: 1.2em;
-    line-height: 1.4em;
-  }
+      > label > input,
+      > label > textarea,
+      > button {
+        margin-bottom: 1em;
+        padding: 0.2em;
+        width: 100%;
+        height: 1.8em;
+        font-size: 1.2em;
+        line-height: 1.4em;
+      }
 
-  textarea {
-    flex-grow: 1;
-    resize: vertical;
-  }
+      > label > textarea {
+        flex-grow: 1;
+        resize: vertical;
+      }
 
-  h2 {
-    margin-bottom: 0.6em;
+      > h2 {
+        margin-bottom: 0.6em;
+      }
+    }
   }
 </style>

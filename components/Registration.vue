@@ -94,9 +94,8 @@ export default {
 }
 </script>
 
-<style scoped>
-  label {
-    display: block;
-    margin-bottom: 0;
-  }
+<style scope lang="scss">
+* > form > label {
+  display: block;
+}
 </style>

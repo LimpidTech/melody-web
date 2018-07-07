@@ -22,13 +22,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  section {
+  * {
     display: flex;
     flex-direction: column;
     float: right;
     padding-right: 3em;
 
-    a {
+    > nav > a {
       display: block;
       color: inherit;
       text-decoration: none;
@@ -39,7 +39,7 @@ export default {
       flex-direction: row;
       padding-right: 0;
 
-      a {
+      > nav > a {
         display: inline-block;
         margin: 0 1.5em 0.2em 0;
         vertical-align: bottom;
