@@ -4,7 +4,7 @@
     :subject="post.subject"
     :html="post.html"
     :topics="post.topics"
-    :user="post.author"
+    :author="post.author"
   />
 </template>
 

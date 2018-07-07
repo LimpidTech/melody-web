@@ -91,7 +91,7 @@
     @media (min-width: 780px) {
       header {
         display: flex;
-       align-items: baseline;
+        align-items: baseline;
 
         > h2 {
           flex-grow: 1;

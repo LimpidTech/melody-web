@@ -80,11 +80,6 @@ h4, h5, h6 {
     margin-bottom: 0;
     padding-top: 1em;
     font-size: 1.2em;
-
-    > section {
-      margin: 0 auto;
-      max-width: 90%;
-    }
   }
 
   > footer {
