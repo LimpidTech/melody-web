@@ -62,10 +62,15 @@
       line-height: 2em;
 
       > h2 {
+        flex-grow: 1;
         margin-right: .7em;
         padding: 0 0.4em;
         background: #E9E9E9AA;
         color: #303030;
+      }
+
+      > h4 {
+        font-size: 0.8em;
       }
 
       a:link, a:active, a:visited, a:hover {
@@ -75,10 +80,6 @@
 
       > h2, > h4 {
         margin-bottom: 0;
-      }
-
-      > h2 {
-        flex-grow: 1;
       }
     }
 
