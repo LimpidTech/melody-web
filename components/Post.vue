@@ -59,10 +59,14 @@
     > header {
       display: flex;
       align-items: baseline;
+      line-height: 2em;
 
-      padding: 0 0.4em;
-      background: #E9E9E9AA;
-      color: #303030;
+      > h2 {
+        margin-right: .7em;
+        padding: 0 0.4em;
+        background: #E9E9E9AA;
+        color: #303030;
+      }
 
       a:link, a:active, a:visited, a:hover {
         color: inherit;
@@ -79,13 +83,14 @@
     }
 
     > div {
-      font-size: 1.2rem;
+      padding: 3em;
+      padding: 0.2em 0.5em;
     }
 
     > footer {
       text-align: right;
       padding-right: 3em;
-      font-size: 0.9rem;
+      font-size: 0.9em;
     }
   }
 </styled>
