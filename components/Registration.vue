@@ -50,7 +50,7 @@
                value='Register'
         />
 
-        <nuxt-link to='/login/'>Already have an account? Sign in here!</nuxt-link>
+        <nuxt-link to='/account/login/'>Already have an account? Sign in here!</nuxt-link>
       </div>
     </form>
   </section>
