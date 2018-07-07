@@ -2,7 +2,6 @@
   <section>
     <header>
       <Navigation />
-      <h2>Metanic</h2>
     </header>
 
     <main>
