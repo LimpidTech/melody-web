@@ -22,6 +22,7 @@ function getInitalPageData(asyncData, context) {
   const user = metanic
     .get('user', 'current')
     .then(metanic.applyMeta(context))
+    .catch(() => {})
 
   const promises = [user]
 
