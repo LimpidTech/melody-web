@@ -101,6 +101,7 @@ export default {
       > label > textarea {
         flex-grow: 1;
         resize: vertical;
+        min-height: 13ex;
       }
 
       > h2 {
