@@ -1,7 +1,7 @@
 <template>
   <section>
     <Post v-for="post in posts" :key="post.url"
-      :url="getPageURL(post)"
+      :reference="post.local_reference"
       :subject="post.subject"
       :html="post.html"
       :topics="post.topics"
@@ -23,12 +23,6 @@ export default {
 
   components: {
     Post,
-  },
-
-  methods: {
-    getPageURL(post) {
-      return `/post/${post.local_reference}`
-    },
   },
 }
 </script>

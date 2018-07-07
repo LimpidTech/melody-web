@@ -12,9 +12,8 @@ export default page({
   components: {Home},
 
   asyncData({ store }) {
-    const metanic = Metanic.FromStore(store)
-
-    return metanic.get('collection', 'recent_posts')
+    return Metanic.FromStore(store)
+      .get('collection', 'recent_posts')
       .then(({ data }) => ({collection: data}))
       .catch(err => { throw err })
   },

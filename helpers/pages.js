@@ -5,8 +5,11 @@ import { Metanic } from '~/clients/metanic'
 import cookies from '~/helpers/cookies'
 
 function initializeAuthorization({ req, store }) {
+  if (!req) { return }
+
   const cookieData = cookies(req.headers.cookie)
   const token = cookieData['authentication:token']
+
   if (!token) { return }
   store.commit('updateAuthenticationToken', token)
 }

@@ -32,7 +32,7 @@
     },
 
     props: {
-      url: String,
+      reference: String,
 
       subject: String,
       html: String,
@@ -48,6 +48,12 @@
         name: String,
         url: String,
       }],
+    },
+
+    data() {
+      return {
+        url: `/post/${this.reference}/`,
+      }
     },
   }
 </script>

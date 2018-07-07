@@ -1,9 +1,10 @@
 <template>
   <Post
-    :url="post.url"
+    :reference="post.local_reference"
     :subject="post.subject"
     :html="post.html"
     :topics="post.topics"
+    :user="post.author"
   />
 </template>
 
