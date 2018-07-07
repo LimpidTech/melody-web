@@ -1,8 +1,9 @@
 <template>
-  <span>
-    <FriendlyTime :time=date :prefix=timePrefix />
+  <FriendlyTime :time=date :prefix=timePrefix />
+  <!--
+    TODO: Does this work?
     <span v-if=friendlyDate> {{ friendlyDate }} </span>
-  </span>
+  -->
 </template>
 
 
