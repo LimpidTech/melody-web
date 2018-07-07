@@ -97,10 +97,10 @@ h4, h5, h6 {
     > header {
       height: 2em;
       overflow: visible;
-    }
 
-    > header > h2 {
-      display: inline-block;
+      > h2 {
+        display: inline-block;
+      }
     }
 
     > footer {
