@@ -1,10 +1,12 @@
 <template>
-  <nav>
-    <a href='/'>Home</a>
+  <section>
+    <nav>
+      <a href='/'>Home</a>
+      <a href='/post/'>Create</a>
+    </nav>
+
     <UserMenu />
-    <Search />
-    <a href='/post/'> + </a>
-  </nav>
+  </section>
 </template>
 
 <script>
@@ -20,24 +22,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
-nav {
-  display: flex;
-  flex-direction: column;
-
-  > a {
-    color: #393939;
-    text-decoration: none;
-  }
-
-  @media (min-width: 780px) {
+  section {
+    display: flex;
+    flex-direction: column;
     float: right;
-    flex-direction: row;
+    padding-right: 3em;
 
-    > a, input {
-      display: inline-block;
-      margin: 0 1.5em 0.2em;
-      vertical-align: bottom;
+    a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    @media (min-width: 780px) {
+      float: none;
+      flex-direction: row;
+      padding-right: 0;
+
+      a {
+        display: inline-block;
+        margin: 0 1.5em 0.2em 0;
+        vertical-align: bottom;
+      }
     }
   }
-}
 </style>
