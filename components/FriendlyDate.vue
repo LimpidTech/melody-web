@@ -1,7 +1,7 @@
 <template>
   <span>
     <FriendlyTime :time=date :prefix=timePrefix />
-    <span v-if=friendlyDate> on {{ friendlyDate }} </span>
+    <span v-if=friendlyDate> {{ friendlyDate }} </span>
   </span>
 </template>
 
