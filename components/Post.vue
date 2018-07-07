@@ -58,12 +58,6 @@
       display: block;
       line-height: 2em;
 
-      > h2 {
-        padding: 0 0.4em;
-        background: #E9E9E9AA;
-        color: #303030;
-      }
-
       > h4 {
         font-size: 0.8em;
       }
@@ -79,8 +73,7 @@
     }
 
     > div {
-      padding: 3em;
-      padding: 0.2em 0.5em;
+      padding-left: 0.1em;
     }
 
     > footer {
