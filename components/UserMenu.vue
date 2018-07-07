@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  data({ $store }) { return { user: $store.state.user || {} } },
+  data({ $store }) { return { user: $store.state.user } },
 }
 </script>
 
