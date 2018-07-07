@@ -1,3 +1,5 @@
+import Promise from 'bluebird'
+
 import { Metanic } from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
@@ -10,18 +12,23 @@ function initializeAuthorization({ req, store }) {
 }
 
 function getInitalPageData(asyncData, context) {
-  /** Ensure cookies are in state. **/
-
   initializeAuthorization(context)
 
-  const options = {}
   const metanic = Metanic.FromStore(context.store)
 
-  // TODO: Wrap asyncData into this.
-  return metanic.get('collection', 'recent_posts', options)
+  const user = metanic
+    .get('user', 'current')
     .then(metanic.applyMeta(context))
-    .then(({ data }) => ({collection: data}))
-    .catch(err => { throw err })
+
+  const promises = [user]
+
+  if (asyncData) {
+    promises.push(asyncData(context))
+  }
+
+  return Promise.all(promises).then((results) => {
+    return Object.assign({}, ...results.slice(1))
+  })
 }
 
 export default function createPage(page) {

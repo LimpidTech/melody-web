@@ -12,29 +12,17 @@ import Post from '~/components/Post'
 
 import { Metanic } from '~/clients/metanic'
 
-import cookies from '~/helpers/cookies'
 import page from '~/helpers/pages'
 
 export default page({
-  asyncData({ req, params }) {
-    const { sessionid } = cookies(req.headers.cookie)
+  components: {Post},
 
-    const metanic = new Metanic(req)
-    const options = {}
+  asyncData({ store, params }) {
+    const metanic = Metanic.FromStore(store)
 
-    if (sessionid) {
-      options.headers = { Cookie: `sessionid=${sessionid};` }
-    }
-
-    return metanic.get('post', params.identifier, options)
-      .then(post => ({ post }))
-      .catch(err => {
-        throw err
-      })
-  },
-
-  components: {
-    Post,
+    return metanic.get('post', params.identifier)
+      .then(({ data }) => ({ post: data }))
+      .catch(err => { throw err })
   },
 })
 </script>
