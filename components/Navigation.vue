@@ -39,10 +39,16 @@ export default {
       flex-direction: row;
       padding-right: 0;
 
-      > nav > a {
-        display: inline-block;
-        margin: 0 1.5em 0.2em 0;
-        vertical-align: bottom;
+      > nav {
+        &:first-child {
+          flex-grow: 1;
+        }
+
+        > a {
+          display: inline-block;
+          margin: 0 1.5em 0.2em 0;
+          vertical-align: bottom;
+        }
       }
     }
   }
