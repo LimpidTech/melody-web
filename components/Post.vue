@@ -54,16 +54,11 @@
 
 <style lang="scss" scoped>
   article {
-    min-width: 32rem;
-
     > header {
-      display: flex;
-      align-items: baseline;
+      display: block;
       line-height: 2em;
 
       > h2 {
-        flex-grow: 1;
-        margin-right: .7em;
         padding: 0 0.4em;
         background: #E9E9E9AA;
         color: #303030;
@@ -92,6 +87,18 @@
       text-align: right;
       padding-right: 3em;
       font-size: 0.9em;
+    }
+
+    @media (min-width: 780px) {
+      header {
+        display: flex;
+       align-items: baseline;
+
+        > h2 {
+          flex-grow: 1;
+          margin-right: .7em;
+        }
+      }
     }
   }
 </styled>
