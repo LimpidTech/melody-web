@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent='create' action=. method='POST' >
+  <form @submit.prevent='create' action=. method='POST'>
     <h2>New Content</h2>
 
     <label>

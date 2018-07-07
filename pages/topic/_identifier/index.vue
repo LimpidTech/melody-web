@@ -26,9 +26,7 @@ export default page({
     return metanic
       .get('topic', params.identifier, options)
       .then(topic => ({ topic }))
-      .catch(err => {
-        throw err
-      })
+      .catch(err => { throw err })
   },
 
   components: {

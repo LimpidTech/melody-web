@@ -76,8 +76,10 @@ h4, h5, h6 {
 
   > main {
     flex-grow: 1;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 95vw;
     padding: 0.4em;
-    margin-bottom: 0;
     padding-top: 1em;
     font-size: 1.2em;
   }
@@ -99,10 +101,6 @@ h4, h5, h6 {
 
     > header > h2 {
       display: inline-block;
-    }
-
-    > main {
-      max-width: 68rem;
     }
 
     > footer {
