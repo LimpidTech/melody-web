@@ -4,6 +4,7 @@
       :reference="post.local_reference"
       :subject="post.subject"
       :html="post.html"
+      :author="post.author"
       :topics="post.topics"
     />
   </section>
