@@ -4,7 +4,7 @@
       :reference="post.local_reference"
       :subject="post.subject"
       :html="post.html"
-      :topics="post.topics"
+      :topics=getTopics(post)
       :author="post.author"
       :created="post.created"
       :modified="post.last_modified"
@@ -23,6 +23,21 @@ export default {
 
   components: {
     Post,
+  },
+
+  methods: {
+    getTopics(post) {
+      const topics = []
+
+      for (const topic of post.topics) {
+        topics.push({
+          name: topic.name,
+          reference: topic.local_reference,
+        })
+      }
+
+      return topics
+    },
   },
 }
 </script>

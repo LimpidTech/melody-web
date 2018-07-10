@@ -1,7 +1,7 @@
 <template>
   <section>
     <Post v-for="post in posts" :key="post.url"
-      :url="post.url"
+      :reference="post.local_reference"
       :subject="post.subject"
       :html="post.html"
       :topics="post.topics"

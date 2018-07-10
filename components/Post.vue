@@ -16,15 +16,21 @@
     <div v-html="html"></div>
 
     <footer>
-      <a v-for="topic in topics" :key="topic.url" href='#'>
+      <a v-for="topic in topics" :key="topic.url" :href=getTopicURL(topic)>
         {{topic.name}}
       </a>
+
+      <!-- TODO: Allow deleting without Javascript -->
+      <a v-if='isOwner' :href=editUrl>edit</a>
+      <a v-if='isOwner' :href=deleteUrl v-on:click='remove($event)'>delete</a>
     </footer>
   </article>
 </template>
 
 <script>
   import FriendlyDate from '~/components/FriendlyDate'
+
+  import { Metanic } from '~/clients/metanic'
 
   export default {
     components: {
@@ -46,14 +52,33 @@
 
       topics: [Array, {
         name: String,
-        url: String,
+        reference: String,
       }],
     },
 
     data() {
-      return {
-        url: `/post/${this.reference}/`,
-      }
+      const { state } = this.$store
+
+      const isOwner = state.user.username === this.author.username
+      const url = `/post/${this.reference}/`
+
+      const deleteUrl = `${url}delete/`
+      const editUrl = `${url}edit/`
+
+      return {deleteUrl, editUrl, isOwner, url}
+    },
+
+    methods: {
+      getTopicURL: topic => `/topic/${topic.reference}/`,
+
+      remove(event) {
+        event.preventDefault()
+
+        const { $store } = this
+        const metanic = Metanic.FromStore($store)
+
+        metanic.delete('post', this.reference)
+      },
     },
   }
 </script>
@@ -86,6 +111,10 @@
       text-align: right;
       padding-right: 3em;
       font-size: 0.9em;
+
+      > a {
+        padding: .1em .3em;
+      }
     }
 
     @media (min-width: 780px) {

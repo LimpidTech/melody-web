@@ -13,8 +13,8 @@ export default page({
   components: { Editor },
 
   methods: {
-    onPostCreated(data) { window.location.assign('/') },
-    onPostFailed(error) { console.error(error) },
+    onPostCreated(post) { window.location.assign(`/post/${post.local_reference}`) },
+    onPostFailed: console.error,
   },
 })
 </script>

@@ -65,13 +65,17 @@ export class Metanic {
   request(...parts) {
     const { url, options } = this.extractRequestComponents(...parts)
 
+    let request = fetch(url, options)
+      .then(verify)
+      .then(extractHeaders)
+
+    // DELETE and HEAD requests don't return response bodies
+    if (options.method !== 'DELETE' && options.method !== 'HEAD') {
+      request = request.then(toJSON)
+    }
+
     return new Promise((resolve, reject) =>
-      fetch(url, options)
-        .then(verify)
-        .then(extractHeaders)
-        .then(toJSON)
-        .then(resolve)
-        .catch(reject)
+      request.then(resolve, reject)
     )
   }
 

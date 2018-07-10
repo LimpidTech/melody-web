@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent='create' action=. method='POST'>
+  <form @submit.prevent='submit' action=. method='PUT'>
     <h2>New Content</h2>
 
     <label>
       <input
         type='text'
         name='subject'
-        v-model='subject'
+        :value='subject'
         placeholder='Subject'
       />
     </label>
@@ -14,7 +14,7 @@
     <label>
       <textarea
         name='body'
-        v-model='body'
+        :value='body'
         placeholder="Start your next masterpiece right here."
       />
     </label>
@@ -23,7 +23,7 @@
       <input
         type='text'
         name='topics'
-        v-model='topics'
+        :value='topicNames'
         placeholder='Topics separated by commas'
       />
     </label>
@@ -35,42 +35,55 @@
 <script>
 export default {
   props: {
-    url: String,
+    reference: String,
+
+    subject: String,
+    body: String,
+
+    // TODO: How do I validate values in the Array?
+    topics: {
+      type: Array,
+      default: () => [],
+    },
+
     created: Function,
-    failure: Function,
+    failed: Function,
   },
 
   data() {
+    const topicNames = []
+
+    for (const topic of this.topics) {
+      topicNames.push(topic.name)
+    }
+
     return {
-      subject: '',
-      body: '',
-      topics: '',
+      topicNames: topicNames.join(', '),
     }
   },
 
   methods: {
-    async create(event) {
-      // SEC: IF THIS NOT CORRECT, WE WILL LEAK DATA.
+    async submit(event) {
+      return this.$store.dispatch(this.reference ? 'updatePost' : 'createPost', {
+        body: event.target.body.value,
+        local_reference: this.reference,
+        subject: event.target.subject.value,
+        topics: event.target.topics.value,
+      })
+        .then(this.onSubmitSuccess)
+        .catch(this.onSubmitFailed)
+    },
 
-      // TODO: Test that this is the correct way to reference the context
-      // NOTE: The store may be a better place for this, since it is sync'd
-      //       to the client.
+    async onSubmitFailed(error) {
+      return this.failed(error)
+    },
 
-      try {
-        const { data } = await this.$store.dispatch('createPost', {
-          subject: this.subject,
-          body: this.body,
-          topics: this.topics,
-        })
-
-        this.created(data)
-      } catch (exception) {
-        this.failure(exception)
-      }
+    async onSubmitSuccess(result) {
+      return this.created(result)
     },
 
     submitText() {
-      if (this.url) { return 'Update' }
+      if (this.reference) { return 'Update' }
       return 'Create'
     },
   },

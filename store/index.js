@@ -47,8 +47,11 @@ export const actions = {
 
   // Functions for working with data in services
   createPost(store, body) {
-    const metanic = new Metanic.FromStore(store)
-    return metanic.post('post', { body })
+    return Metanic.FromStore(store).post('post', {body})
+  },
+
+  updatePost(store, body) {
+    return Metanic.FromStore(store).put('post', body.local_reference, {body})
   },
 
   // Utility functions for authentication & authorization
@@ -59,5 +62,4 @@ export const actions = {
         commit('updateUser', metadata.user)
       })
   },
-
 }
