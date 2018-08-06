@@ -16,7 +16,6 @@ export default {
 
 <style scoped lang="scss">
   * > a {
-    color: #393939;
     text-decoration: none;
   }
 
