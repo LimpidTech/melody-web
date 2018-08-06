@@ -8,6 +8,7 @@
       :author="post.author"
       :modified="post.modified"
       :isPinned="post.is_pinned"
+      :summarize="!post.is_pinned"
     />
   </section>
 </template>
