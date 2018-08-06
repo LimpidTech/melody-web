@@ -3,6 +3,7 @@
     <nav>
       <a href='/'>Home</a>
       <a href='/post/'>Create</a>
+      <a href='/topic/'>Topics</a>
     </nav>
 
     <UserMenu />

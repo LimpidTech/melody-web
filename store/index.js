@@ -54,6 +54,9 @@ export const actions = {
   // Functions for working with collections
   getCollection: (store, reference) => Metanic.FromStore(store).get('collection', reference),
 
+  // Functions for working with collections
+  getTopics: (store) => Metanic.FromStore(store).get('topic'),
+
   // Utility functions for authentication & authorization
   authenticate({ commit }, data) {
     metanic.post('jwt', 'obtain', {body: data})
