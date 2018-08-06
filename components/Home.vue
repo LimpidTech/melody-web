@@ -6,8 +6,7 @@
       :html="post.html"
       :topics=getTopics(post)
       :author="post.author"
-      :created="post.created"
-      :modified="post.last_modified"
+      :modified="post.modified"
       :isPinned="post.is_pinned"
     />
   </section>

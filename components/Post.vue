@@ -56,7 +56,6 @@
         type: String,
       },
 
-      created: [Date, String],
       modified: [Date, String],
 
       author: [Object, {
