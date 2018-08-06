@@ -3,7 +3,7 @@
     <a v-if="!user.isAuthenticated" href="/account/login/">Login</a>
     <a v-if="!user.isAuthenticated" href="/account/register/">Register</a>
 
-    <span v-if="user.isAuthenticated && !user.avatar">{{ user.username }}</span>
+    <span v-if="user.isAuthenticated && !user.avatar">Welcome, {{ user.username }}</span>
     <img v-if="user.isAuthenticated && user.avatar" v-src="user.avatar" />
   </nav>
 </template>
