@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article v-bind:class='{ pinned: isPinned }'>
     <header>
       <h2>
         <a :href="url">{{ subject }}</a>
