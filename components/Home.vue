@@ -42,3 +42,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+* > section > article {
+  margin-bottom: 1em;
+}
+</style>
