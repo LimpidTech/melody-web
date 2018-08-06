@@ -1,6 +1,9 @@
 <template>
   <form @submit.prevent='submit' action=. method='PUT'>
-    <h2>New Content</h2>
+    <h2>
+      New Content
+      <nuxt-link v-if=reference :to=url >View on site</nuxt-link>
+    </h2>
 
     <label>
       <input
@@ -46,8 +49,15 @@ export default {
       default: () => [],
     },
 
-    created: Function,
-    failed: Function,
+    created: {
+      default: () => {},
+      type: Function,
+    },
+
+    failed: {
+      default: console.error,
+      type: Function,
+    },
   },
 
   data() {
@@ -59,6 +69,7 @@ export default {
 
     return {
       topicNames: topicNames.join(', '),
+      url: `/post/${this.reference}/`,
     }
   },
 
@@ -74,12 +85,12 @@ export default {
         .catch(this.onSubmitFailed)
     },
 
-    async onSubmitFailed(error) {
-      return this.failed(error)
-    },
-
     async onSubmitSuccess(result) {
       return this.created(result)
+    },
+
+    async onSubmitFailed(error) {
+      return this.failed(error)
     },
 
     submitText() {
@@ -115,6 +126,10 @@ export default {
 
       > h2 {
         margin-bottom: 0.6em;
+
+        > a {
+          float: right;
+        }
       }
     }
   }

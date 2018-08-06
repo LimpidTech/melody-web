@@ -46,13 +46,8 @@ export const actions = {
   nuxtServerInit: context => {},
 
   // Functions for working with data in services
-  createPost(store, body) {
-    return Metanic.FromStore(store).post('post', {body})
-  },
-
-  updatePost(store, body) {
-    return Metanic.FromStore(store).put('post', body.local_reference, {body})
-  },
+  createPost: (store, body) => Metanic.FromStore(store).post('post', {body}),
+  updatePost: (store, body) => Metanic.FromStore(store).put('post', body.local_reference, {body}),
 
   // Utility functions for authentication & authorization
   authenticate({ commit }, data) {

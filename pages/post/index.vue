@@ -1,8 +1,5 @@
 <template>
-  <Editor
-    :created=onPostCreated
-    :failed=onPostFailed
-  />
+  <Editor :created=created />
 </template>
 
 <script>
@@ -13,8 +10,9 @@ export default page({
   components: { Editor },
 
   methods: {
-    onPostCreated(post) { window.location.assign(`/post/${post.local_reference}`) },
-    onPostFailed: console.error,
+    created: function (post) {
+      this.$router.push(`/post/${post.data.local_reference}/edit/`)
+    },
   },
 })
 </script>

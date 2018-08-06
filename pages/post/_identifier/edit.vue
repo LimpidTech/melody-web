@@ -4,8 +4,7 @@
     :subject="post.subject"
     :body="post.body"
     :topics="post.topics"
-    :created=onPostCreated
-    :failed=onPostFailure
+    :created=created
   />
 </template>
 
@@ -20,19 +19,14 @@ export default page({
   components: {Editor},
 
   asyncData({ store, params }) {
-    const metanic = Metanic.FromStore(store)
-
-    return metanic.get('post', params.identifier)
+    return Metanic.FromStore(store).get('post', params.identifier)
       .then(({ data }) => ({ post: data }))
       .catch(err => { throw err })
   },
 
   methods: {
-    onPostCreated(post) {
-      // window.location.assign(`/post/${post.local_reference}`)
+    created: function () {
     },
-
-    onPostFailure: console.error,
   },
 })
 </script>
