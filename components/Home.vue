@@ -45,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 * > section > article {
-  margin-bottom: 1em;
+  margin-bottom: 0em;
+  &.pinned { margin-bottom: 1em; }
 }
 </style>
