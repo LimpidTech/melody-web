@@ -4,7 +4,6 @@
     :subject="post.subject"
     :body="post.body"
     :topics="post.topics"
-    :created=created
   />
 </template>
 
@@ -22,11 +21,6 @@ export default page({
     return Metanic.FromStore(store).get('post', params.identifier)
       .then(({ data }) => ({ post: data }))
       .catch(err => { throw err })
-  },
-
-  methods: {
-    created: function () {
-    },
   },
 })
 </script>
