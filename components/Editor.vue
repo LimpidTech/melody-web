@@ -2,7 +2,7 @@
   <form @submit.prevent='submit' action=. method='PUT'>
     <h2>
       <span>New Content</span>
-      <nuxt-link v-if=reference :to=url >View on site</nuxt-link>
+      <nuxt-link v-if=reference :to=url>View on site</nuxt-link>
     </h2>
 
     <label>
@@ -130,13 +130,14 @@ export default {
       margin-bottom: 0.6em;
 
       > * {
+        font-size: 0.65em;
+        float: right;
+        color: inherit;
+
         &:nth-child(1) {
           font-size: 1em;
           flex-grow: 1;
         }
-
-        font-size: 0.7em;
-        float: right;
       }
     }
   }
