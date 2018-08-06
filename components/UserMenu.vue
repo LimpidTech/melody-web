@@ -17,6 +17,7 @@ export default {
 <style scoped lang="scss">
   * > a {
     text-decoration: none;
+    color: inherit;
   }
 
   @media (min-width: 780px) {

@@ -31,7 +31,7 @@ export default {
     background-color: #333;
     color: #FEFEFE;
 
-    > nav a {
+    > nav > a {
       display: block;
       color: inherit;
       text-decoration: none;
