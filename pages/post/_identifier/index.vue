@@ -8,13 +8,12 @@
     :author="post.author"
     :pinned="post.is_pinned"
     :summarize=false
+    :deleted=deleted
   />
 </template>
 
 <script>
 import Post from '~/components/Post'
-
-import { Metanic } from '~/clients/metanic'
 
 import page from '~/helpers/pages'
 
@@ -22,11 +21,15 @@ export default page({
   components: {Post},
 
   asyncData({ store, params }) {
-    const metanic = Metanic.FromStore(store)
-
-    return metanic.get('post', params.identifier)
+    return store.dispatch('getPost', params.identifier)
       .then(({ data }) => ({ post: data }))
       .catch(err => { throw err })
+  },
+
+  methods: {
+    deleted: function () {
+      this.$router.push('/')
+    },
   },
 })
 </script>

@@ -10,6 +10,7 @@
       :modified="post.modified"
       :isPinned="post.is_pinned"
       :summarize="!post.is_pinned"
+      :deleted=deleted
     />
   </section>
 </template>
@@ -21,6 +22,7 @@ import Post from '~/components/Post'
 export default {
   props: {
     posts: Array,
+    refresh: Function,
   },
 
   components: {
@@ -39,6 +41,10 @@ export default {
       }
 
       return topics
+    },
+
+    deleted() {
+      return this.refresh()
     },
   },
 }

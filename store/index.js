@@ -45,9 +45,14 @@ export const mutations = {
 export const actions = {
   nuxtServerInit: context => {},
 
-  // Functions for working with data in services
+  // Functions for working with posts
   createPost: (store, body) => Metanic.FromStore(store).post('post', {body}),
+  getPost: (store, reference) => Metanic.FromStore(store).get('post', reference),
+  removePost: (store, reference) => Metanic.FromStore(store).delete('post', reference),
   updatePost: (store, body) => Metanic.FromStore(store).put('post', body.local_reference, {body}),
+
+  // Functions for working with collections
+  getCollection: (store, reference) => Metanic.FromStore(store).get('collection', reference),
 
   // Utility functions for authentication & authorization
   authenticate({ commit }, data) {

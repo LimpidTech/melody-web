@@ -34,8 +34,6 @@
 <script>
   import FriendlyDate from '~/components/FriendlyDate'
 
-  import { Metanic } from '~/clients/metanic'
-
   export default {
     components: {
       FriendlyDate,
@@ -76,6 +74,16 @@
         default: false,
         type: Boolean,
       },
+
+      deleted: {
+        default: () => {},
+        type: Function,
+      },
+
+      deleteFailed: {
+        default: console.error,
+        type: Function,
+      },
     },
 
     data() {
@@ -96,10 +104,9 @@
       remove(event) {
         event.preventDefault()
 
-        const { $store } = this
-        const metanic = Metanic.FromStore($store)
-
-        metanic.delete('post', this.reference)
+        this.$store.dispatch('removePost', this.reference)
+          .then(this.deleted)
+          .catch(this.deleteFailed)
       },
     },
   }
