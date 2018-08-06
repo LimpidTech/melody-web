@@ -4,6 +4,7 @@
       :reference="post.local_reference"
       :subject="post.subject"
       :html="post.html"
+      :summary="post.summary"
       :topics=getTopics(post)
       :author="post.author"
       :modified="post.modified"
