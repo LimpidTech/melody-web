@@ -69,8 +69,13 @@ a {
   min-height: 100vh;
 
   > header {
-    padding: 0.4rem 0.8rem 0;
+    margin: 0;
+    padding: 0;
     user-select: none;
+
+    > * {
+      padding: 0em 0.4em;
+    }
   }
 
   > header > h2 {
@@ -93,6 +98,10 @@ a {
     font-size: 0.8em;
     text-align: center;
     user-select: none;
+    background-color: #333;
+    color: #FEFEFE;
+
+    > a { color: inherit; }
   }
 
   @media (min-width: 780px) {
@@ -109,7 +118,7 @@ a {
 
     > footer {
       display: block;
-      padding: 1em;
+      padding: 0.2em;
     }
   }
 }

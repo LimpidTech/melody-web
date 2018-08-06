@@ -28,6 +28,9 @@ export default {
     float: right;
     padding-right: 0.3em;
 
+    background-color: #333;
+    color: #FEFEFE;
+
     > nav > a {
       display: block;
       color: inherit;
