@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent='submit' action=. method='PUT'>
     <h2>
-      New Content
+      <span>New Content</span>
       <nuxt-link v-if=reference :to=url >View on site</nuxt-link>
     </h2>
 
@@ -102,34 +102,41 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  * {
-    > form {
+  * > form {
+    display: flex;
+    flex-direction: column;
+
+    > label > input,
+    > label > textarea,
+    > button {
+      margin-bottom: 1em;
+      padding: 0.2em;
+      width: 100%;
+      height: 1.8em;
+      font-size: 1.2em;
+      line-height: 1.4em;
+    }
+
+    > label > textarea {
+      flex-grow: 1;
+      resize: vertical;
+      min-height: 13ex;
+    }
+
+    > h2 {
       display: flex;
-      flex-direction: column;
+      align-items: baseline;
 
-      > label > input,
-      > label > textarea,
-      > button {
-        margin-bottom: 1em;
-        padding: 0.2em;
-        width: 100%;
-        height: 1.8em;
-        font-size: 1.2em;
-        line-height: 1.4em;
-      }
+      margin-bottom: 0.6em;
 
-      > label > textarea {
-        flex-grow: 1;
-        resize: vertical;
-        min-height: 13ex;
-      }
-
-      > h2 {
-        margin-bottom: 0.6em;
-
-        > a {
-          float: right;
+      > * {
+        &:nth-child(1) {
+          font-size: 1em;
+          flex-grow: 1;
         }
+
+        font-size: 0.7em;
+        float: right;
       }
     }
   }

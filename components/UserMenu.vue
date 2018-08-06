@@ -15,22 +15,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  * {
+  * > a {
+    color: #393939;
+    text-decoration: none;
+  }
+
+  @media (min-width: 780px) {
+    display: inline-block;
+
     > a {
-      color: #393939;
-      text-decoration: none;
+      vertical-align: bottom;
     }
 
-    @media (min-width: 780px) {
-      display: inline-block;
-
-      > a {
-        vertical-align: bottom;
-      }
-
-      a ~ a {
-        padding: 0 0 0 1.5em;
-      }
+    a ~ a {
+      padding: 0 0 0 1.5em;
     }
   }
 </style>

@@ -3,8 +3,11 @@
     :reference="post.local_reference"
     :subject="post.subject"
     :html="post.html"
+    :summary="post.summary"
     :topics="post.topics"
     :author="post.author"
+    :pinned="post.is_pinned"
+    :summarize=false
   />
 </template>
 

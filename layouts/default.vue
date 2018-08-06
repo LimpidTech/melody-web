@@ -54,6 +54,10 @@ h4, h5, h6 {
   font-style: normal;
 }
 
+a {
+  outline: none;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

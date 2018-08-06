@@ -6,23 +6,27 @@
       </h2>
 
       <h4>
-        Published
-        <span v-if=author>by {{ author.username }}</span>
-        <span v-else>anonymously</span>
-        <FriendlyDate :date=created />
+        <span v-if=isPinned>Pinned</span>
+        <span v-else>Published</span>
+
+        <span v-if=author> by {{ author.username }}</span>
+        <span v-else> anonymously</span>
+
+        <FriendlyDate :date=modified />
+
+        <!-- TODO: Allow deleting without Javascript -->
+        <a v-if='isOwner' :href=editUrl>edit</a>
+        <a v-if='isOwner' :href=deleteUrl v-on:click='remove($event)'>delete</a>
       </h4>
     </header>
 
-    <div v-html="html"></div>
+    <div v-if=!summarize v-html=html></div>
+    <div v-else v-html=summary></div>
 
     <footer>
       <a v-for="topic in topics" :key="topic.url" :href=getTopicURL(topic)>
         {{topic.name}}
       </a>
-
-      <!-- TODO: Allow deleting without Javascript -->
-      <a v-if='isOwner' :href=editUrl>edit</a>
-      <a v-if='isOwner' :href=deleteUrl v-on:click='remove($event)'>delete</a>
     </footer>
   </article>
 </template>
@@ -41,7 +45,16 @@
       reference: String,
 
       subject: String,
-      html: String,
+
+      html: {
+        default: '',
+        type: String,
+      },
+
+      summary: {
+        default: '',
+        type: String,
+      },
 
       created: [Date, String],
       modified: [Date, String],
@@ -54,6 +67,16 @@
         name: String,
         reference: String,
       }],
+
+      summarize: {
+        default: true,
+        type: Boolean,
+      },
+
+      isPinned: {
+        default: false,
+        type: Boolean,
+      },
     },
 
     data() {
@@ -95,11 +118,23 @@
 
       a:link, a:active, a:visited, a:hover {
         color: inherit;
-        text-decoration: none;
       }
 
       > h2, > h4 {
         margin-bottom: 0;
+
+        > a {
+          padding: .1em .3em;
+          font-size: 0.9em;
+          text-decoration: underline;
+
+          &::before { content: '/'; }
+
+          &:nth-child(1) {
+            text-decoration: none;
+            &::before { content: ''; }
+          }
+        }
       }
     }
 
@@ -111,10 +146,6 @@
       text-align: right;
       padding-right: 3em;
       font-size: 0.9em;
-
-      > a {
-        padding: .1em .3em;
-      }
     }
 
     @media (min-width: 780px) {
