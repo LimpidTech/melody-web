@@ -130,6 +130,7 @@
           &::before { content: '/'; }
 
           &:nth-child(1) {
+            padding-left: 0;
             text-decoration: none;
             &::before { content: ''; }
           }
