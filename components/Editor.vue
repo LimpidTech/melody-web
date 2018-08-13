@@ -27,11 +27,11 @@
         type='text'
         name='topics'
         :value='topicNames'
-        placeholder='Topics separated by commas'
+        placeholder='Topics, comma-separated'
       />
-    </label>
 
-    <button type='submit'>{{ submitText() }}</button>
+      <button type='submit'>{{ submitText() }}</button>
+    </label>
   </form>
 </template>
 
@@ -85,13 +85,8 @@ export default {
         .catch(this.onSubmitFailed)
     },
 
-    async onSubmitSuccess(result) {
-      return this.created(result)
-    },
-
-    async onSubmitFailed(error) {
-      return this.failed(error)
-    },
+    async onSubmitSuccess(result) { return this.created(result) },
+    async onSubmitFailed(error) { return this.failed(error) },
 
     submitText() {
       if (this.reference) { return 'Update' }
@@ -106,28 +101,10 @@ export default {
     display: flex;
     flex-direction: column;
 
-    > label > input,
-    > label > textarea,
-    > button {
-      margin-bottom: 1em;
-      padding: 0.2em;
-      width: 100%;
-      height: 1.8em;
-      font-size: 1.2em;
-      line-height: 1.4em;
-    }
-
-    > label > textarea {
-      flex-grow: 1;
-      resize: vertical;
-      min-height: 13ex;
-    }
-
     > h2 {
       display: flex;
-      align-items: baseline;
-
       margin-bottom: 0.6em;
+      align-items: baseline;
 
       > * {
         font-size: 0.65em;
@@ -135,9 +112,33 @@ export default {
         color: inherit;
 
         &:nth-child(1) {
-          font-size: 1em;
+          font-size: inherit;
+        }
+      }
+    }
+
+    > label {
+      display: flex;
+
+      > input,
+      > textarea,
+      > button {
+        margin-bottom: 1em;
+        padding: 0.2em;
+        height: 1.8em;
+        min-width: 25%;
+        font-size: 1.2em;
+        line-height: 1.4em;
+        flex-grow: 0;
+
+        &:nth-child(1) {
           flex-grow: 1;
         }
+      }
+
+      > textarea {
+        resize: vertical;
+        min-height: 13ex;
       }
     }
   }
