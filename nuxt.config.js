@@ -6,7 +6,7 @@ function setting(name, defaultValue) {
 }
 
 function withSentry(configuration) {
-  if (process.env.SENTRY_PRIVATE_KEY) {
+  if (process.env.SENTRY_PRIVATE_KEY || process.env.SENTRY_DSN) {
     configuration.modules = configuration.modules || []
     configuration.modules.push('@nuxtjs/sentry')
 
@@ -14,6 +14,7 @@ function withSentry(configuration) {
       public_key: process.env.SENTRY_PUBLIC_KEY,
       private_key: process.env.SENTRY_PRIVATE_KEY,
       project_id: process.env.SENTRY_PROJECT_ID,
+      dsn: process.env.SENTRY_DSN,
       config: {},
     }
   }
