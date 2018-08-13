@@ -97,26 +97,36 @@ export class Metanic {
   }
 }
 
-function verify(response) {
+function responseError(response) {
+  let result
+
   if (response.status === 400) {
-    throw new RequestError(
+    result = new RequestError(
       'Unexpected or malformed data was sent to ' + response.url
     )
-  }
-
-  switch (response.status) {
-    case 401:
-      // TODO: Request new authentication
-      break
-  }
-
-  if (response.status > 299 || response.status < 200) {
-    throw new ServerError(`
+  } else if (response.status < 200 || response.status > 299) {
+    result = new ServerError(`
       Received unexpected response status (${response.status}) from
       ${response.url}
     `)
   }
 
+  if (result) {
+    result.response = response
+  }
+
+  return result
+}
+
+function verify(response) {
+  switch (response.status) {
+    case 401:
+      // TODO: Request new authentication and replay request
+      break
+  }
+
+  const error = responseError(response)
+  if (error) { throw error }
   return response
 }
 
