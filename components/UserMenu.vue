@@ -15,9 +15,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  * > a {
+* {
+  > a {
     text-decoration: none;
     color: inherit;
+    font-size: 1.4em;
+    padding-right: 0.3em;
   }
 
   @media (min-width: 780px) {
@@ -25,10 +28,14 @@ export default {
 
     > a {
       vertical-align: bottom;
+      font-size: 0.2em;
+      padding-bottom: 0em;
+      padding-right: 0em;
     }
 
     a ~ a {
       padding: 0 0 0 1.5em;
     }
   }
+}
 </style>

@@ -25,9 +25,11 @@ export default {
 <style scoped lang="scss">
   * {
     display: flex;
-    flex-direction: column;
-    float: right;
-    padding-right: 0.3em;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0.3em;
+    font-size: 1.4em;
 
     background-color: #333;
     color: #FEFEFE;
@@ -36,12 +38,14 @@ export default {
       display: block;
       color: inherit;
       text-decoration: none;
+      padding: 0 1.5em 0.2em 0;
     }
 
     @media (min-width: 780px) {
       float: none;
-      flex-direction: row;
       padding-right: 0;
+      font-size: 1em;
+      flex-direction: row;
 
       > nav {
         &:first-child {
@@ -50,7 +54,6 @@ export default {
 
         > a {
           display: inline-block;
-          margin: 0 1.5em 0.2em 0;
           vertical-align: bottom;
         }
       }
