@@ -13,7 +13,11 @@ import page from '~/helpers/pages'
 export default page({
   components: { Editor, Authenticator },
 
-  asyncData: ({ store }) => ({isAuthenticated: store.state.user.isAuthenticated}),
+  asyncData: ({ store }) => {
+    return {
+      isAuthenticated: store.state.user.isAuthenticated,
+    }
+  },
 
   methods: {
     created: function (post) {

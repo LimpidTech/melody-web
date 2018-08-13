@@ -1,5 +1,3 @@
-import Promise from 'bluebird'
-
 import { Metanic } from '~/clients/metanic'
 
 import cookies from '~/helpers/cookies'
@@ -19,20 +17,13 @@ function getInitalPageData(asyncData, context) {
 
   const metanic = Metanic.FromStore(context.store)
 
-  const user = metanic
-    .get('user', 'current')
+  const user = metanic.get('user', 'current')
     .then(metanic.applyMeta(context))
     .catch(() => {})
 
-  const promises = [user]
+  if (!asyncData) { return }
 
-  if (asyncData) {
-    promises.push(asyncData(context))
-  }
-
-  return Promise.all(promises).then((results) => {
-    return Object.assign({}, ...results.slice(1))
-  })
+  return user.then(() => asyncData(context))
 }
 
 export default function createPage(page) {
