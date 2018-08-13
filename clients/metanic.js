@@ -67,10 +67,10 @@ export class Metanic {
 
     return new Promise((resolve, reject) =>
       fetch(url, options)
-        .then(verify)
         .then(extractHeaders)
-        .then(toJSON)
+        .then(verify)
         .then(resolve)
+        .then(toJSON)
         .catch(reject)
     )
   }
@@ -107,9 +107,10 @@ function verify(response) {
   }
 
   if (response.status > 299 || response.status < 200) {
-    throw new ServerError(
-      'Received unexpected response from ' + response.url
-    )
+    throw new ServerError(`
+      Received unexpected response status (${response.status}) from
+      ${response.url}
+    `)
   }
 
   return response
