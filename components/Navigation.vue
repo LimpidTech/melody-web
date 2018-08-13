@@ -44,6 +44,8 @@ export default {
     @media (min-width: 780px) {
       float: none;
       padding-right: 0;
+      justify-content: start;
+      flex-wrap: nowrap;
       font-size: 1em;
       flex-direction: row;
 

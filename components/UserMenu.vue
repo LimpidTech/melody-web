@@ -27,14 +27,8 @@ export default {
     display: inline-block;
 
     > a {
-      vertical-align: bottom;
-      font-size: 0.2em;
-      padding-bottom: 0em;
-      padding-right: 0em;
-    }
-
-    a ~ a {
-      padding: 0 0 0 1.5em;
+      font-size: 0.95em;
+      padding: 0 0.7em;
     }
   }
 }
