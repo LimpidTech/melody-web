@@ -98,24 +98,19 @@ export class Metanic {
 }
 
 function responseError(response) {
-  let result
+  let message
 
   if (response.status === 400) {
-    result = new RequestError(
-      'Unexpected or malformed data was sent to ' + response.url
-    )
+    message = `Unexpected or malformed data was sent to ${response.url}`
   } else if (response.status < 200 || response.status > 299) {
-    result = new ServerError(`
-      Received unexpected response status (${response.status}) from
-      ${response.url}
-    `)
+    message = `Received unexpected response status (${response.status}) from ${response.url}.`
   }
 
-  if (result) {
-    result.response = response
-  }
+  if (!message) { return }
 
-  return result
+  return response.text()
+    .catch(() => { throw new Error(`${message}. Response body failed to be read.`) })
+    .then(text => { throw new Error(`${message} ${text}`) })
 }
 
 function verify(response) {
@@ -125,8 +120,8 @@ function verify(response) {
       break
   }
 
-  const error = responseError(response)
-  if (error) { throw error }
+  const errorOccured = responseError(response)
+  if (errorOccured) { return errorOccured }
   return response
 }
 
