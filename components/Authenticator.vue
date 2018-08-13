@@ -41,8 +41,8 @@
                  value='Sign in'
           />
 
-          <nuxt-link to="/register/">
-            Don't have an account? Sign up here!
+          <nuxt-link to="/account/register/">
+            Don't have an account? Sign up
           </nuxt-link>
         </p>
       </footer>
@@ -68,6 +68,7 @@
     methods: {
       submit(evt) {
         evt.preventDefault()
+
         this.$store.dispatch('authenticate', {
           username: this.username,
           password: this.password,
