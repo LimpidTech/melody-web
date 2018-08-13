@@ -111,9 +111,10 @@ function verify(response) {
   }
 
   if (response.status > 299 || response.status < 200) {
-    throw new ServerError(
-      'Received unexpected response from ' + response.url
-    )
+    throw new ServerError(`
+      Received unexpected response status (${response.status}) from
+      ${response.url}
+    `)
   }
 
   return response
