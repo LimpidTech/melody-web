@@ -1,4 +1,4 @@
-FROM alpine/alpine
+FROM alpine
 MAINTAINER Bailey "monokrome" Stoner <polar@metanic.org>
 
 RUN apk update
@@ -9,5 +9,7 @@ ADD . /opt/metanic/clients/web
 WORKDIR /opt/metanic/clients/web
 
 RUN yarn
+
+EXPOSE 3030
 
 CMD ["yarn", "start"]
