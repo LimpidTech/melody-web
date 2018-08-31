@@ -11,6 +11,6 @@ WORKDIR /opt/metanic/clients/web
 RUN yarn
 RUN yarn build
 
-EXPOSE 3030
+EXPOSE 3000
 
 CMD ["yarn", "start"]
