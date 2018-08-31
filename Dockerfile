@@ -9,6 +9,7 @@ ADD . /opt/metanic/clients/web
 WORKDIR /opt/metanic/clients/web
 
 RUN yarn
+RUN yarn build
 
 EXPOSE 3030
 
